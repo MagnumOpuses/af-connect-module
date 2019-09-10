@@ -5,7 +5,7 @@
 
 # Gravity Beacon
 
-Gravity Beacon is a widget whose purpose is to ease the integration procedure for data consumer services.
+The purpose of Gravity Beacon is to ease the integration procedure for CV consumer services.
 
 The Beacon has two distinct initiation modes:
 * Interactive button: Displays a button for the end-user to click to initiate the authentication and cv extraction procedure.
@@ -53,20 +53,19 @@ function onResponse(data) {
     // The data parameter contains the json CV structure.
 }
 ```
-5. If needed you may override the default properties.
-
-The gravity-beacon element can be configured via data properties.
-See all configuration properties below.
-
-- `cookie` (default: `AMV_SSO_COOKIE`): Waits for this cookie name to be populated.
-- `poll_rate` (default: `1000`): SSO cookie checking frequency, repeats until cookie has been populated or the timeout reached.
-- `timeout` (default: `300000`): Duration of how long to wait for SSO cookie.
-- `auth` (default: `https://www.arbetsformedlingen.se/loggain`): Authentication page url for the end-user to obtain their SSO cookie.
-- `portability_url` (default: `/cv`): Service endpoint to fetch end-user CV from.
-- `on_auth` (default: `undefined`): Name of callback function to call upon initation of authentication procedure.
-- `on_fetch` (default: `undefined`): Name of callback function to call upon completed authentication and fetching of CV begins.
-- `on_response` (default: `undefined`): Name of callback function to call upon fetched CV.
-- `receieve_only`: The _Non-interactive mode_ is used if this data property is defined.
+5. If needed you may override the default properties.  
+The gravity-beacon element can be configured via the following data properties:
+| Data property        | Default value                             | Description                                                                                    |
+| -------------------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| data-cookie          | AMV_SSO_COOKIE                            | Waits for this cookie name to be populated.                                                    |
+| data-poll_rate       | 1000                                      | SSO cookie checking frequency, repeats until cookie has been populated or the timeout reached. |
+| data-timeout         | 300000                                    | Duration of how long to wait for SSO cookie.                                                   |
+| data-auth            | https://www.arbetsformedlingen.se/loggain | Authentication page url for the end-user to obtain their SSO cookie.                           |
+| data-portability_url | /cv                                       | Service endpoint to fetch end-user CV from.                                                    |
+| data-on_auth         | undefined                                 | Name of callback function to call upon initation of authentication procedure.                  |
+| data-on_fetch        | undefined                                 | Name of callback function to call upon completed authentication and fetching of CV begins.     |
+| data-on_response     | undefined                                 | Name of callback function to call upon fetched CV.                                             |
+| data-receieve_only   | N/A                                       | The _Non-interactive mode_ is used if this data property is defined.                           |
 
 ### Prerequisites
 
@@ -89,7 +88,8 @@ No deployment guidelines yet.
 
 ## Built with
 
-No technologies yet.
+- NPM v6.4.1 (Node package manager)
+- Browserify v16.5.0 (Javascript bundler for browser)
 
 ## Contributing
 
