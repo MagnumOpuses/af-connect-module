@@ -1,0 +1,23 @@
+{
+  "name": "gravity-beacon",
+  "version": "0.1.0",
+  "description": "![alt text][logo]",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify index.js > dist/gravity-beacon.bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MagnumOpuses/gravity-beacon.git"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/MagnumOpuses/gravity-beacon/issues"
+  },
+  "homepage": "https://github.com/MagnumOpuses/gravity-beacon#readme",
+  "dependencies": {
+    "browserify": "^16.5.0"
+  }
+}
