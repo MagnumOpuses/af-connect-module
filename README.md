@@ -55,6 +55,7 @@ function onResponse(data) {
 ```
 5. If needed you may override the default properties.  
 The gravity-beacon element can be configured via the following data properties:
+
 | Data property        | Default value                             | Description                                                                                    |
 | -------------------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | data-cookie          | AMV_SSO_COOKIE                            | Waits for this cookie name to be populated.                                                    |
