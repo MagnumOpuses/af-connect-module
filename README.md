@@ -39,7 +39,7 @@ _Multiple Gravity Beacons can be added to a page through duplication of this ele
     data-on_response="onResponse">
 ```
 4. Define customized functions in your frontend that the Beacon will callback at various stages in the process.
-
+```
 function onAuth() {
     // This function is called by Gravity Beacon when authentication procedure begins.
 }
@@ -52,7 +52,7 @@ function onResponse(data) {
     // This function is called by Gravity Beacon when CV extraction completes.
     // The data parameter contains the json CV structure.
 }
-
+```
 5. If needed you may override the default properties.
 
 The gravity-beacon element can be configured via data properties.
