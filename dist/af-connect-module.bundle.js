@@ -9,28 +9,29 @@ let getCookie = (name) => {
 
 let fetchCV = (config) => {
     return new Promise((resolve, reject) => {            
-        // Open AF login page if AMV_SSO_COOKIE is not set
         window.open(config.afConnectUrl, '_blank').focus();
         
-        // Repeatedly try to read the cookie until found
+        // Repeatedly try to read the cv from AF Portability
         let timerId = setInterval(() => {
-            console.log("Polling for CV from Portability API");
+            console.log("Polling for CV from Portability API: ", config.afPortabilityUrl);
         }, config.pollRate);
     })
     .catch(err => console.log('Failed to fetch CV, error:', err));
 }
 
-$.each($('.gravity-beacon'), (index, element) => {
-    let beacon = $(element);
-                
+$.each($('.af-connect-module'), (index, element) => {
+    let afConnectModule = $(element);
+
     let config = {
-        label: beacon.attr('data-label') || 'Gravity CV',
-        pollRate: beacon.attr('data-poll_rate') || '1000', // 1 second
-        timeout: beacon.attr('data-timeout') || '300000', // 5 minutes
-        afConnectUrl: beacon.attr('data-af-connect-url') || 'https://demotest.arbetsformedlingen.se',
+        label: afConnectModule.attr('data-label') || 'AF Connect CV',
+        pollRate: afConnectModule.attr('data-poll_rate') || '1000', // 1 second
+        timeout: afConnectModule.attr('data-timeout') || '300000', // 5 minutes
+        afConnectUrl: afConnectModule.attr('data-af-connect-url') || 'https://demotest.arbetsformedlingen.se',
+        afPortabilityUrl: afConnectModule.attr('data-af-portability-url') || 'https://portability.arbetsformedlingen.se',
+        onResponse: afConnectModule.attr('data-on-response') || undefined
     }
 
-    let gravityButton = $('<input type="button"/>')
+    let afConnectModuleButton = $('<input type="button"/>')
     .val(config.label)
     .css('width', '100%')
     .css('background-color', '#733aca')
@@ -41,7 +42,7 @@ $.each($('.gravity-beacon'), (index, element) => {
     .mouseenter(function() { $(this).css("background-color", "#9c6ce6"); })
     .mouseleave(function() { $(this).css("background-color", "#733aca"); })
     .one('click', (e) => { fetchCV(config); });
-    beacon.append(gravityButton);
+    afConnectModule.append(afConnectModuleButton);
 });
 
 },{}]},{},[1]);
