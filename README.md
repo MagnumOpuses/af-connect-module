@@ -52,8 +52,10 @@ No prerequisites guidelines yet.
 ### Installation
 
 ```bash
-git clone https://github.com/MagnumOpuses/gravity-beacon.git
-cd gravity-beacon
+git clone https://github.com/MagnumOpuses/af-connect-module.git
+cd af-connect-module
+npm install
+npm run build
 ```
 
 ## Test
