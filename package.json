@@ -4,7 +4,7 @@
   "description": "![alt text][logo]",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "browserify index.js > dist/af-connect-module.bundle.js"
   },
   "repository": {
@@ -18,7 +18,11 @@
   },
   "homepage": "https://github.com/MagnumOpuses/af-connect-module#readme",
   "dependencies": {
+    "axios": "^0.19.0",
     "browserify": "^16.5.0",
     "fetch": "^1.1.0"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0"
   }
 }
