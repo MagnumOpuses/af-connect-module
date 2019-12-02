@@ -1,0 +1,24 @@
+{
+  "name": "af-connect-module",
+  "version": "0.1.0",
+  "description": "![alt text][logo]",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify index.js > dist/af-connect-module.bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MagnumOpuses/af-connect-module.git"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/MagnumOpuses/af-connect-module/issues"
+  },
+  "homepage": "https://github.com/MagnumOpuses/af-connect-module#readme",
+  "dependencies": {
+    "browserify": "^16.5.0",
+    "fetch": "^1.1.0"
+  }
+}

@@ -1,10 +1,12 @@
 ### Projectname
 
-Gravity Beacon
+AF Connect Module
 
 ##### Description
 
-Gravity Beacon is a widget whose purpose is to ease the integration procedure for data consumer services.
+The purpose of AF Connect Module is to ease the integration procedure for CV consumer services.
+
+The AF Connect Module provides an interactive button for the end-user to initiate the authentication and CV extraction procedure.
 
 ##### Versions, current dev state and future
 
@@ -16,7 +18,7 @@ No getting started guidelines yet.
 
 ##### Source code
 
-https://github.com/MagnumOpuses/gravity-beacon
+https://github.com/MagnumOpuses/af-connect-module
 
 ##### Demo
 
