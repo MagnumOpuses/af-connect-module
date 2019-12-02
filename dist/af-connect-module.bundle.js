@@ -6,9 +6,14 @@ let mockFailCount = 0;
 let fetchSession = (config) => {
     console.log('Fetching session');
     return new Promise((resolve, reject) => {
+
+        if (config.apiKey === undefined) {
+            throw "Api key required to fetch session token";
+        }
+
         // Fetch a new session token  
         const req = new XMLHttpRequest();
-        const url = config.afPortabilityUrl + '/token';
+        const url = config.afPortabilityUrl + '/token?api-key=' + config.apiKey;
 
         return new Promise((resolve, reject) => {
             req.open("GET", url, true);
@@ -106,9 +111,10 @@ $.each($('.af-connect-module'), (index, element) => {
         label: afConnectModule.attr('data-label') || 'AF Connect',
         pollRate: afConnectModule.attr('data-poll_rate') || '1000', // 1 second
         timeout: afConnectModule.attr('data-timeout') || '300000', // 5 minutes
-        afConnectUrl: afConnectModule.attr('data-af-connect-url') || 'https://demotest.arbetsformedlingen.se',
+        afConnectUrl: afConnectModule.attr('data-af-connect-url') || 'https://localhost',
         afPortabilityUrl: afConnectModule.attr('data-af-portability-url') || 'http://localhost:8080/portability-api',
-        onResponse: afConnectModule.attr('data-on-response') || undefined
+        onResponse: afConnectModule.attr('data-on-response') || undefined,
+        apiKey: afConnectModule.attr('data-api-key') || undefined,
     }
 
     let afConnectModuleButton = $('<input type="button"/>')
