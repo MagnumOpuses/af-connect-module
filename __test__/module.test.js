@@ -1,6 +1,6 @@
 const mockAxios = require("axios");
 
-test("fetchSession with mock api", () => {
+test("getSession with mock api", () => {
   mockAxios.get.mockImplementationOnce(() =>
     Promise.resolve({ token: "aa31667d-afde-4941-8749-d71ff90bc247" })
   );
@@ -10,14 +10,14 @@ test("fetchSession with mock api", () => {
   };
 
   const connectModule = require("../lib/connect-module");
-  return connectModule.fetchSession(config).then(token => {
+  return connectModule.getSession(config).then(token => {
     expect(token).toBeDefined();
     expect(typeof token).toBe("string");
     expect(token).toBe("aa31667d-afde-4941-8749-d71ff90bc247");
   });
 });
 
-test("fetchCV with mock api", () => {
+test("getEnvelope with mock api", () => {
   mockAxios.get.mockImplementationOnce(() =>
     Promise.resolve(require("./cv.json"))
   );
@@ -36,7 +36,7 @@ test("fetchCV with mock api", () => {
 
   const connectModule = require("../lib/connect-module");
   return connectModule
-    .fetchCV(config, "aa31667d-afde-4941-8749-d71ff90bc247")
+    .getEnvelope(config, "aa31667d-afde-4941-8749-d71ff90bc247")
     .then(cv => {
       expect(cv).toBeDefined();
       expect(typeof cv).toBe("object");

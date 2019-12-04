@@ -1,41 +1,36 @@
 "use strict";
 
-let connectModule = require("./lib/connect-module");
+const connectModule = require("./lib/connect-module");
 
-$.each($(".af-connect-module"), (index, element) => {
-  let afConnectModule = $(element);
-
-  afConnectModule.css("display", "inline");
+const containers = document.getElementsByClassName("af-connect-module");
+Array.prototype.forEach.call(containers, container => {
+  container.style["display"] = "inline";
 
   let config = {
-    label: afConnectModule.attr("data-label") || "AF Connect",
-    pollRate: afConnectModule.attr("data-poll_rate") || "1000", // 1 second
-    timeout: afConnectModule.attr("data-timeout") || "300000", // 5 minutes
+    label: container.getAttribute("data-label") || "AF Connect",
+    pollRate: container.getAttribute("data-poll_rate") || "1000", // 1 second
+    timeout: container.getAttribute("data-timeout") || "300000", // 5 minutes
     afConnectUrl:
-      afConnectModule.attr("data-af-connect-url") ||
+      container.getAttribute("data-af-connect-url") ||
       "https://demotest.arbetsformedlingen.se",
     afPortabilityUrl:
-      afConnectModule.attr("data-af-portability-url") ||
+      container.getAttribute("data-af-portability-url") ||
       "http://localhost:8080/portability-api",
-    onResponse: afConnectModule.attr("data-on-response") || undefined
+    afPortabilityApiKey:
+      container.getAttribute("data-af-portability-api-key") || undefined,
+    onResponse: container.getAttribute("data-on-response") || undefined
   };
 
-  let afConnectModuleButton = $('<input type="button"/>')
-    .val(config.label)
-    .css("background-color", "#3040C4")
-    .css("color", "#eee")
-    .css("border", "0px")
-    .css("border-radius", "3px")
-    .css("padding", "6px 20px")
-    .css("font-weight", "600")
-    .mouseenter(function() {
-      $(this).css("background-color", "#7782e2");
-    })
-    .mouseleave(function() {
-      $(this).css("background-color", "#3040C4");
-    })
-    .one("click", e => {
-      connectModule.fetchSequence(config);
-    });
-  afConnectModule.append(afConnectModuleButton);
+  const button = document.createElement("button");
+  button.appendChild(document.createTextNode(config.label));
+  button.style["background-color"] = "#3040C4";
+  button.style["color"] = "#eee";
+  button.style["border"] = "0px";
+  button.style["border-radius"] = "3px";
+  button.style["padding"] = "6px 20px";
+  button.style["font-weight"] = "600";
+  button.addEventListener("click", evt => {
+    connectModule.fetchSequence(config);
+  });
+  container.appendChild(button);
 });
