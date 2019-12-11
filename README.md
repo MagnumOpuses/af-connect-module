@@ -23,30 +23,30 @@ Download the docker release package from URL_HERE, unpack the archive and start 
 Now let's create a basic front-end example that utilizes the AF-Connect-Module.
 
 1. Download the latest version of the AF Connect Module from the [Releases section](https://github.com/MagnumOpuses/af-connect-module/releases).
-2. Unpack the archive and include the pre-compiled `af-connect-module.bundle.js` into your frontend code.
+1. Unpack the archive and include the pre-compiled `af-connect-module.bundle.js` into your frontend code.
 
 Example implementation:
 
-```
+```html
 <html>
-    <body>
-        <script type="text/javascript">
-            function onResponse(envelope) {
-                // Envelope contains user CV and consent details.
-                console.log(envelope);
-            }
-        </script>
-        <div class="af-connect-module" data-on-response="onResponse"></div>
-        <script src="af-connect-module.bundle.js"></script>
-    </body>
+  <body>
+    <script type="text/javascript">
+      function onResponse(envelope) {
+        // Envelope contains user CV and consent details.
+        console.log(envelope);
+      }
+    </script>
+    <div class="af-connect-module" data-on-response="onResponse"></div>
+    <script src="af-connect-module.bundle.js"></script>
+  </body>
 </html>
 ```
 
-The example consists of three parts.
+The example above consists of three parts.
 
-- A callback for handling received data responses from AF-Connect.
-- A DOM element which defines the configuration and location for the interactive button.
-- The pre-compiled module script that will bring this all to life.
+- A globally defined callback for handling received data responses from AF-Connect.
+- A DOM element which defines the configuration properties and location for the interactive button.
+- The pre-compiled module script that will bring this all to life by generating the interactive button.
 
 _Notice: Multiple AF Connect Modules can be added to a page through duplication of the DOM element._
 
@@ -56,21 +56,25 @@ The interactive button comes with pre-defined configuration defaults, but each p
 
 Here's an example for how you can reduce the data polling rate to just once per 10 seconds, instead of the default once per second.
 
-```
-<div class="af-connect-module" data-poll_rate="10000" data-on_response="onResponse"></div>
+```html
+<div
+  class="af-connect-module"
+  data-poll_rate="10000"
+  data-on_response="onResponse"
+></div>
 ```
 
 The table below shows all available configuration properties, default values and usage description.
 
-| Data property            | Default value                             | Description                                                                                    |
-| ------------------------ | ----------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| data-label               | AF Connect CV                             | The text label of the AF Connect Module button.                                                |
-| data-pollRate            | 1000                                      | SSO cookie checking frequency, repeats until cookie has been populated or the timeout reached. |
-| data-timeout             | 300000                                    | Duration of how long to wait for SSO cookie.                                                   |
-| data-afConnectUrl        | https://www.arbetsformedlingen.se/loggain | Authentication page url for the end-user to obtain their SSO cookie.                           |
-| data-afPortabilityUrl    | /cv                                       | Service endpoint to fetch end-user CV from.                                                    |
-| data-afPortabilityApiKey | undefined                                 | Service endpoint to fetch end-user CV from.                                                    |
-| data-onResponse          | undefined                                 | Name of callback function to call upon fetched CV.                                             |
+| Configuration property      | Default value                         | Description                                                                          |
+| --------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------ |
+| data-label                  | AF Connect                            | Label displayed on the AF Connect Module interactive button.                         |
+| data-poll_rate              | 1000                                  | Data polling frequency, described in milliseconds.                                   |
+| data-poll_timeout           | 300000                                | Data polling timeout, described in milliseconds.                                     |
+| data-af_connect_url         | https://localhost                     | URL to AF-Connect service to open in new tab/window when the user clicks the button. |
+| data-af_portability_url     | http://localhost:8080/portability-api | URL to service where session token and user data can be obtained.                    |
+| data-af_portability_api_key | undefined                             | The API key used when querying for session token and polling for data.               |
+| data-on_response            | undefined                             | Name of global callback function to call upon polling success/failure.               |
 
 ### Prerequisites
 
@@ -101,7 +105,7 @@ docker-compose instructions goes here...
 
 ## AF-Connect Integration environment
 
-Guidelines for connecting module to Arbetsförmedlingen's AF-Connect integration environment goes here...
+Guidelines for connecting to AF-Connect integration environment goes here...
 
 ## Built with
 
