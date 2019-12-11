@@ -8,7 +8,7 @@
 
 The purpose of this module is to enable third-party systems to easily integrate with Arbetsförmedlingen's AF-Connect infrastructure in order to obtain data/documents/certificates related to registered jobseekers and/or employers with their explicit consent.
 
-This module provides an interactive button which you may install in your service's frontend. The end-user/visitor can then initiate the Arbetsförmedlingen user authentication procedure, select their profile/CV to share and finally provide their explicit consent allowing this data to be shared with a third-party system.
+This module provides an interactive button which you may install in your service's frontend. The end-user/visitor can then initiate the Arbetsförmedlingen user authentication procedure, select their profile/CV to share and finally provide their explicit consent allowing this data to be shared with and retrieved by a third-party system.
 
 ## Versions, current dev state and future
 
@@ -25,7 +25,9 @@ Now let's create a basic front-end example that utilizes the AF-Connect-Module.
 1. Download the latest version of the AF Connect Module from the [Releases section](https://github.com/MagnumOpuses/af-connect-module/releases).
 1. Unpack the archive and include the pre-compiled `af-connect-module.bundle.js` into your frontend code.
 
-Example implementation:
+### Example implementation:
+
+Below you find the most barebones example of how to install the module:
 
 ```html
 <html>
@@ -36,19 +38,34 @@ Example implementation:
         console.log(envelope);
       }
     </script>
-    <div class="af-connect-module" data-on-response="onResponse"></div>
+    <div class="af-connect-module" data-on_response="onResponse"></div>
     <script src="af-connect-module.bundle.js"></script>
   </body>
 </html>
 ```
 
-The example above consists of three parts.
+The example consists of three parts.
 
 - A globally defined callback for handling received data responses from AF-Connect.
 - A DOM element which defines the configuration properties and location for the interactive button.
 - The pre-compiled module script that will bring this all to life by generating the interactive button.
 
-_Notice: Multiple AF Connect Modules can be added to a page through duplication of the DOM element._
+Now visit the example page and you'll find a blue "AF Connect" button
+
+![Example implementation result screenshot](https://github.com/MagnumOpuses/af-connect-module/blob/clean-up/.github/screenshots/af-connect-module-button.png?raw=true)
+
+By clicking the "AF Connect" button, a new tab/window will open up to show you an authentication page. This page is operatig entirely on mocked data, so to complete the authentication you can enter the following credentials:
+
+```
+username: abc
+password: 123
+```
+
+You will now be presented with a handful of example profiles that you may select to share with the requesting service and finally click the "Consent and close" button. The page closes and you're back to the initial example page.
+
+Open up the browser developer tools console and you will see that the `onResponse` callback have been called and the retrieved envelope has been logged.
+
+:notebook: _Notice: Multiple AF Connect Modules can be added to a page through duplication of the DOM element._
 
 ## Configuration
 
