@@ -10,9 +10,9 @@ The purpose of this module is to enable third-party systems to easily integrate 
 
 This module provides an interactive button which you may install in your service's frontend. The end-user/visitor can then initiate the Arbetsförmedlingen user authentication procedure, select their profile/CV to share and finally provide their explicit consent allowing this data to be shared with and retrieved by a third-party system.
 
-## Versions, current dev state and future
+## Sequence diagram showing all interactions of this module.
 
-No versions yet.
+![AF Connect Module sequence diagram](https://github.com/MagnumOpuses/af-connect-module/blob/clean-up/.github/screenshots/af-connect-module-sequence-diagram.png?raw=true)
 
 ## Getting started
 
@@ -136,6 +136,10 @@ Guidelines for connecting to AF-Connect integration environment coming soon...
 
 - NPM v6.4.1 (Node package manager)
 - Browserify v16.5.0 (Javascript bundler for browser)
+
+## Versions, current dev state and future
+
+No versions yet.
 
 ## Contributing
 
