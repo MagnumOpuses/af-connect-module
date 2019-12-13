@@ -9,6 +9,10 @@ The purpose of AF Connect Module is to ease the integration procedure for CV con
 
 The AF Connect Module provides an interactive button for the end-user to initiate the authentication and CV extraction procedure.
 
+## Af-Connect Test Integration
+
+Comming soon! :)
+
 ## Versions, current dev state and future
 
 No versions yet.
