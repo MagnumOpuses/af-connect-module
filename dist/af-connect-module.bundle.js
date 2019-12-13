@@ -10,16 +10,16 @@ Array.prototype.forEach.call(containers, container => {
   let config = {
     label: container.getAttribute("data-label") || "AF Connect",
     pollRate: container.getAttribute("data-poll_rate") || "1000", // 1 second
-    timeout: container.getAttribute("data-timeout") || "300000", // 5 minutes
+    timeout: container.getAttribute("data-poll_timeout") || "300000", // 5 minutes
     afConnectUrl:
-      container.getAttribute("data-af-connect-url") ||
-      "https://demotest.arbetsformedlingen.se",
+      container.getAttribute("data-af_connect_url") ||
+      "https://af-connect.local",
     afPortabilityUrl:
-      container.getAttribute("data-af-portability-url") ||
-      "http://localhost:8080/portability-api",
+      container.getAttribute("data-af_portability_url") ||
+      "http://af-connect.local:8080/portability-api",
     afPortabilityApiKey:
-      container.getAttribute("data-af-portability-api-key") || undefined,
-    onResponse: container.getAttribute("data-on-response") || undefined
+      container.getAttribute("data-af_portability_api_key") || undefined,
+    onResponse: container.getAttribute("data-on_response") || undefined
   };
 
   const button = document.createElement("button");

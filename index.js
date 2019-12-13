@@ -12,10 +12,10 @@ Array.prototype.forEach.call(containers, container => {
     timeout: container.getAttribute("data-poll_timeout") || "300000", // 5 minutes
     afConnectUrl:
       container.getAttribute("data-af_connect_url") ||
-      "https://demotest.arbetsformedlingen.se",
+      "https://af-connect.local",
     afPortabilityUrl:
       container.getAttribute("data-af_portability_url") ||
-      "http://localhost:8080/portability-api",
+      "http://af-connect.local:8080/portability-api",
     afPortabilityApiKey:
       container.getAttribute("data-af_portability_api_key") || undefined,
     onResponse: container.getAttribute("data-on_response") || undefined

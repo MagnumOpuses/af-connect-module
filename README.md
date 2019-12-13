@@ -83,15 +83,15 @@ Here's an example for how you can reduce the data polling rate to just once per 
 
 The table below shows all available configuration properties, default values and usage description.
 
-| Configuration property      | Default value                         | Description                                                                          |
-| --------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------ |
-| data-label                  | AF Connect                            | Label displayed on the AF Connect Module interactive button.                         |
-| data-poll_rate              | 1000                                  | Data polling frequency, described in milliseconds.                                   |
-| data-poll_timeout           | 300000                                | Data polling timeout, described in milliseconds.                                     |
-| data-af_connect_url         | https://localhost                     | URL to AF-Connect service to open in new tab/window when the user clicks the button. |
-| data-af_portability_url     | http://localhost:8080/portability-api | URL to service where session token and user data can be obtained.                    |
-| data-af_portability_api_key | undefined                             | The API key used when querying for session token and polling for data.               |
-| data-on_response            | undefined                             | Name of global callback function to call upon polling success/failure.               |
+| Configuration property      | Default value                                | Description                                                                          |
+| --------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------ |
+| data-label                  | AF Connect                                   | Label displayed on the AF Connect Module interactive button.                         |
+| data-poll_rate              | 1000                                         | Data polling frequency, described in milliseconds.                                   |
+| data-poll_timeout           | 300000                                       | Data polling timeout, described in milliseconds.                                     |
+| data-af_connect_url         | https://af-connect.local                     | URL to AF-Connect service to open in new tab/window when the user clicks the button. |
+| data-af_portability_url     | http://af-connect.local:8080/portability-api | URL to service where session token and user data can be obtained.                    |
+| data-af_portability_api_key | undefined                                    | The API key used when querying for session token and polling for data.               |
+| data-on_response            | undefined                                    | Name of global callback function to call upon polling success/failure.               |
 
 ### Prerequisites
 
@@ -120,9 +120,11 @@ We recommend deploying the AF-Connect system locally to your development machine
 docker-compose instructions goes here...
 ```
 
-## AF-Connect Integration environment
+## AF-Connect integration environment
 
-Guidelines for connecting to AF-Connect integration environment goes here...
+Integration environment: `test-afc.jobtechdev.se`
+
+Guidelines for connecting to AF-Connect integration environment coming soon...
 
 ## Built with
 
