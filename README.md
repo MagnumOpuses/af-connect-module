@@ -18,6 +18,12 @@ No versions yet.
 
 We provide a docker release package for you to easily run the entire AF-Connect system locally in your development machine and effectively allowing you to both experience and evaluate whether this integration brings value to your service.
 
+First and foremost, add the following host to your local hosts file:
+
+```
+127.0.0.1 af-connect.local
+```
+
 Download the docker release package from URL_HERE, unpack the archive and start up all the pre-configured services with command: `docker-compose up`.
 
 Now let's create a basic front-end example that utilizes the AF-Connect-Module.
