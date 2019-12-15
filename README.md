@@ -1,55 +1,109 @@
 ![alt text][logo]
 
 [logo]: https://github.com/MagnumOpuses/project-meta/blob/master/img/jobtechdev_black.png "JobTech dev logo"
+
 [A JobTech Project](https://www.jobtechdev.se)
 
 # AF Connect Module
 
-The purpose of AF Connect Module is to ease the integration procedure for CV consumer services.
+The purpose of this module is to enable third-party systems to easily integrate with Arbetsförmedlingen's AF-Connect infrastructure in order to obtain data/documents/certificates related to registered jobseekers and/or employers with their explicit consent.
 
-The AF Connect Module provides an interactive button for the end-user to initiate the authentication and CV extraction procedure.
+This module provides an interactive button which you may install in your service's frontend. The end-user/visitor can then initiate the Arbetsförmedlingen user authentication procedure, select their profile/CV to share and finally provide their explicit consent allowing this data to be shared with and retrieved by a third-party system.
 
-## Versions, current dev state and future
+## Sequence diagram showing all interactions of this module.
 
-No versions yet.
+![AF Connect Module sequence diagram](https://github.com/MagnumOpuses/af-connect-module/blob/clean-up/.github/screenshots/af-connect-module-sequence-diagram.png?raw=true)
 
 ## Getting started
 
-1. Acquire the latest version of the compiled AF Connect Module bundle, see releases.
-2. Include the AF Connect Module bundle into frontend code.
-```
-<script src="af-connect-module.bundle.js"></script>
-```
-3. 
-Define an element with class `af-connect-module`, this element serves as the container and configuration for your AF Connect Module.
-_Multiple AF Connect Modules can be added to a page through duplication of this element._
-```
-<div class="af-connect-module" data-on_response="onResponse"></div>
-```
-4. Define customized functions in your frontend that the AF Connect Module will callback at various stages in the process.
-```
-function onResponse(data) {
-    // This function is called by AF Connect Module when CV extraction completes.
-    // The data parameter contains the json CV structure.
-}
-```
-5. If needed you may override the default properties.  
-The af-connect-module element can be configured with the following data properties:
+We provide a docker release package for you to easily run the entire AF-Connect system locally in your development machine and effectively allowing you to both experience and evaluate whether this integration brings value to your service.
 
-| Data property            | Default value                             | Description                                                                                    |
-| ------------------------ | ----------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| data-label               | AF Connect CV                             | The text label of the AF Connect Module button.                                                |
-| data-poll-rate           | 1000                                      | SSO cookie checking frequency, repeats until cookie has been populated or the timeout reached. |
-| data-timeout             | 300000                                    | Duration of how long to wait for SSO cookie.                                                   |
-| data-data-af-connect-url | https://www.arbetsformedlingen.se/loggain | Authentication page url for the end-user to obtain their SSO cookie.                           |
-| data-portability_url     | /cv                                       | Service endpoint to fetch end-user CV from.                                                    |
-| data-on-response         | undefined                                 | Name of callback function to call upon fetched CV.                                             |
+First and foremost, add the following host to your local hosts file:
+
+```
+127.0.0.1 af-connect.local
+```
+
+Download the docker release package from URL_HERE, unpack the archive and start up all the pre-configured services with command: `docker-compose up`.
+
+Now let's create a basic front-end example that utilizes the AF-Connect-Module.
+
+1. Download the latest version of the AF Connect Module from the [Releases section](https://github.com/MagnumOpuses/af-connect-module/releases).
+1. Unpack the archive and include the pre-compiled `af-connect-module.bundle.js` into your frontend code.
+
+### Example implementation:
+
+Below you find the most barebones example of how to install the module:
+
+```html
+<html>
+  <body>
+    <script type="text/javascript">
+      function onResponse(envelope) {
+        // Envelope contains user CV and consent details.
+        console.log(envelope);
+      }
+    </script>
+    <div class="af-connect-module" data-on_response="onResponse"></div>
+    <script src="af-connect-module.bundle.js"></script>
+  </body>
+</html>
+```
+
+The example consists of three parts.
+
+- A globally defined callback for handling received data responses from AF-Connect.
+- A DOM element which defines the configuration properties and location for the interactive button.
+- The pre-compiled module script that will bring this all to life by generating the interactive button.
+
+Now visit the example page and you'll find a blue "AF Connect" button
+
+![Example implementation result screenshot](https://github.com/MagnumOpuses/af-connect-module/blob/clean-up/.github/screenshots/af-connect-module-button.png?raw=true)
+
+By clicking the "AF Connect" button, a new tab/window will open up to show you an authentication page. This page is operatig entirely on mocked data, so to complete the authentication you can enter the following credentials:
+
+```
+username: abc
+password: 123
+```
+
+You will now be presented with a handful of example profiles that you may select to share with the requesting service and finally click the "Consent and close" button. The page closes and you're back to the initial example page.
+
+Open up the browser developer tools console and you will see that the `onResponse` callback have been called and the retrieved envelope has been logged.
+
+:notebook: _Notice: Multiple AF Connect Modules can be added to a page through duplication of the DOM element._
+
+## Configuration
+
+The interactive button comes with pre-defined configuration defaults, but each property may be overridden as you see fit.
+
+Here's an example for how you can reduce the data polling rate to just once per 10 seconds, instead of the default once per second.
+
+```html
+<div
+  class="af-connect-module"
+  data-poll_rate="10000"
+  data-on_response="onResponse"
+></div>
+```
+
+The table below shows all available configuration properties, default values and usage description.
+
+| Configuration property      | Default value                                | Description                                                                          |
+| --------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------ |
+| data-label                  | AF Connect                                   | Label displayed on the AF Connect Module interactive button.                         |
+| data-poll_rate              | 1000                                         | Data polling frequency, described in milliseconds.                                   |
+| data-poll_timeout           | 300000                                       | Data polling timeout, described in milliseconds.                                     |
+| data-af_connect_url         | https://af-connect.local                     | URL to AF-Connect service to open in new tab/window when the user clicks the button. |
+| data-af_portability_url     | http://af-connect.local:8080/portability-api | URL to service where session token and user data can be obtained.                    |
+| data-af_portability_api_key | undefined                                    | The API key used when querying for session token and polling for data.               |
+| data-on_response            | undefined                                    | Name of global callback function to call upon polling success/failure.               |
 
 ### Prerequisites
 
 No prerequisites guidelines yet.
 
-### Installation
+### Compile the bundle from source
 
 ```bash
 git clone https://github.com/MagnumOpuses/af-connect-module.git
@@ -60,16 +114,32 @@ npm run build
 
 ## Test
 
-No tests yet.
+```bash
+npm run test
+```
 
 ## Deployment
 
-No deployment guidelines yet.
+We recommend deploying the AF-Connect system locally to your development machine using `docker-compose`.
+
+```
+docker-compose instructions goes here...
+```
+
+## AF-Connect integration environment
+
+Integration environment: `test-afc.jobtechdev.se`
+
+Guidelines for connecting to AF-Connect integration environment coming soon...
 
 ## Built with
 
 - NPM v6.4.1 (Node package manager)
 - Browserify v16.5.0 (Javascript bundler for browser)
+
+## Versions, current dev state and future
+
+No versions yet.
 
 ## Contributing
 
