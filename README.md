@@ -12,7 +12,9 @@ This module provides an interactive button which you may install in your service
 
 ## Sequence diagram showing all interactions of this module.
 
-![AF Connect Module sequence diagram](https://github.com/MagnumOpuses/af-connect-module/blob/clean-up/.github/screenshots/af-connect-module-sequence-diagram.png?raw=true)
+![AF Connect Module sequence diagram](https://github.com/MagnumOpuses/af-connect-module/blob/master/.github/screenshots/af-connect-module-sequence-diagram.png?raw=true)
+
+![AF Connect Module consent flow diagram](https://github.com/MagnumOpuses/af-connect-module/blob/master/.github/screenshots/af-connect-module-consent-flow-diagram.png?raw=true)
 
 ## Getting started
 
