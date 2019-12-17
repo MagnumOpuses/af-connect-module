@@ -12,7 +12,7 @@ This module provides an interactive button which you may install in your service
 
 ## Sequence diagram showing all interactions of this module.
 
-![AF Connect Module sequence diagram](https://github.com/MagnumOpuses/af-connect-module/blob/clean-up/.github/screenshots/af-connect-module-sequence-diagram.png?raw=true)
+![AF Connect Module sequence diagram](https://github.com/MagnumOpuses/af-connect-module/blob/master/.github/screenshots/af-connect-module-sequence-diagram.png?raw=true)
 
 ## Getting started
 
@@ -58,7 +58,7 @@ The example consists of three parts.
 
 Now visit the example page and you'll find a blue "AF Connect" button
 
-![Example implementation result screenshot](https://github.com/MagnumOpuses/af-connect-module/blob/clean-up/.github/screenshots/af-connect-module-button.png?raw=true)
+![Example implementation result screenshot](https://github.com/MagnumOpuses/af-connect-module/blob/master/.github/screenshots/af-connect-module-button.png?raw=true)
 
 By clicking the "AF Connect" button, a new tab/window will open up to show you an authentication page. This page is operatig entirely on mocked data, so to complete the authentication you can enter the following credentials:
 
