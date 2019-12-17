@@ -57,7 +57,7 @@ Download and unpack the latest version of the AF Connect Module from the [Releas
 
 Finally open up the `index.html` in a web browser of your choice and you'll find a blue "AF Connect" button.
 
-![Example implementation result screenshot](https://github.com/MagnumOpuses/af-connect-module/blob/clean-up/.github/screenshots/af-connect-module-button.png?raw=true)
+![Example implementation result screenshot](https://github.com/MagnumOpuses/af-connect-module/blob/master/.github/screenshots/af-connect-module-button.png?raw=true)
 
 By clicking the "AF Connect" button, a new tab/window will open up to show you an authentication page. This page is operatig entirely on mocked data, so to complete the authentication you can enter the following credentials:
 
