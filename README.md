@@ -18,22 +18,17 @@ This module provides an interactive button which you may install in your service
 
 We provide a docker release package for you to easily run the entire AF-Connect system locally in your development machine and effectively allowing you to both experience and evaluate whether this integration brings value to your service.
 
-First and foremost, add the following host to your local hosts file:
+First and foremost, add the following host to your local `hosts` file:
 
 ```
 127.0.0.1 af-connect.local
 ```
 
-Download the docker release package from URL_HERE, unpack the archive and start up all the pre-configured services with command: `docker-compose up`.
+Download the docker release package from [af-connect-compose](https://github.com/MagnumOpuses/af-connect-compose), unpack the archive and start up all the pre-configured services with command: `docker-compose up`.
 
 Now let's create a basic front-end example that utilizes the AF-Connect-Module.
 
-1. Download the latest version of the AF Connect Module from the [Releases section](https://github.com/MagnumOpuses/af-connect-module/releases).
-1. Unpack the archive and include the pre-compiled `af-connect-module.bundle.js` into your frontend code.
-
-### Example implementation:
-
-Below you find the most barebones example of how to install the module:
+Create a new directory in your filesystem and add a new file `index.html` with the following content:
 
 ```html
 <html>
@@ -56,7 +51,9 @@ The example consists of three parts.
 - A DOM element which defines the configuration properties and location for the interactive button.
 - The pre-compiled module script that will bring this all to life by generating the interactive button.
 
-Now visit the example page and you'll find a blue "AF Connect" button
+Download and unpack the latest version of the AF Connect Module from the [Releases section](https://github.com/MagnumOpuses/af-connect-module/releases). Copy the `af-connect-module.bundle.js` into the directory where your `index.html` resides.
+
+Finally open up the `index.html` in a web browser of your choice and you'll find a blue "AF Connect" button.
 
 ![Example implementation result screenshot](https://github.com/MagnumOpuses/af-connect-module/blob/clean-up/.github/screenshots/af-connect-module-button.png?raw=true)
 
