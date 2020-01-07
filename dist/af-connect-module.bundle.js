@@ -118,7 +118,7 @@ const fetchSequence = config => {
         timeoutId = setTimeout(() => {
           clearInterval(timerId);
           reject(ERROR_CODES.E004);
-        }, 10000);
+        }, config.timeout);
       });
     })
     .catch(err => {
