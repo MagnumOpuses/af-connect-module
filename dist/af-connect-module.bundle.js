@@ -42,6 +42,13 @@ Array.prototype.forEach.call(containers, container => {
 
 const axios = require("axios");
 
+const ERROR_CODES = {
+  E001: { code: "E001", message: "Failed to fetch session token" },
+  E002: { code: "E002", message: "Failed to fetch envelope" },
+  E003: { code: "E003", message: "Polling interval exception" },
+  E004: { code: "E004", message: "Polling interval timeout" }
+};
+
 const getSession = config => {
   return axios
     .get(
@@ -51,7 +58,7 @@ const getSession = config => {
       return response.data.token;
     })
     .catch(err => {
-      console.log("Failed to fetch session: ", err);
+      throw ERROR_CODES.E001;
     });
 };
 
@@ -62,10 +69,9 @@ const getEnvelope = (config, session) => {
       switch (response.data.status) {
         case 204:
           // Received no CV/Envelope ready, empty response
-          console.log("CV/Envelope not ready...");
           return;
         default:
-          console.log("CV/Envelope received!", response.data);
+          // Envelope received!
           return response.data;
       }
     })
@@ -77,9 +83,8 @@ const getEnvelope = (config, session) => {
           default:
             return "Unknown response code: " + err.response.status;
         }
-      } else {
-        console.log("Error", err);
       }
+      throw ERROR_CODES.E002;
     });
 };
 
@@ -93,7 +98,7 @@ const fetchSequence = config => {
 
         let timeoutId;
         const timerId = setInterval(() => {
-          getEnvelope(config, sessionToken)
+          return getEnvelope(config, sessionToken)
             .then(cv => {
               if (cv !== undefined) {
                 clearInterval(timerId);
@@ -104,16 +109,21 @@ const fetchSequence = config => {
                 resolve(cv);
               }
             })
-            .catch(err => console.log("Error: ", err));
+            .catch(err => {
+              clearInterval(timerId);
+              reject(err);
+            });
         }, config.pollRate);
 
         timeoutId = setTimeout(() => {
           clearInterval(timerId);
-          reject("Timeout");
-        }, config.timeout);
+          reject(ERROR_CODES.E004);
+        }, 10000);
       });
     })
-    .catch(err => console.log("Failed to fetch envelope, error:", err));
+    .catch(err => {
+      window[config.onResponse].call(undefined, undefined, err);
+    });
 };
 
 module.exports = {
