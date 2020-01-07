@@ -6,10 +6,11 @@
 
 # AF Connect Module
 
+## Introduction
 The purpose of this module is to enable third-party systems to easily integrate with Arbetsförmedlingen's AF-Connect infrastructure in order to obtain data/documents/certificates related to registered jobseekers and/or employers with their explicit consent.
 
-This module provides an interactive button which you may install in your service's frontend. The end-user/visitor can then initiate the Arbetsförmedlingen user authentication procedure, select their profile/CV to share and finally provide their explicit consent allowing this data to be shared with and retrieved by a third-party system.
-
+This module provides an interactive button which you may install in your service's frontend. The end-user/visitor can then initiate the Arbetsförmedlingen user authentication procedure, select their profile/CV to share and finally provide their explicit consent allowing this data to be shared with and retrieved by a third-party system.\
+See how it all works, visit example webpage <a href="https://af-connect-demo.jobtechdev.se" target="_blank">https://af-connect-demo.jobtechdev.se</a>
 ## Sequence diagram showing all interactions of this module.
 
 ![AF Connect Module sequence diagram](https://github.com/MagnumOpuses/af-connect-module/blob/master/.github/screenshots/af-connect-module-sequence-diagram-v2.png?raw=true)
@@ -17,7 +18,13 @@ This module provides an interactive button which you may install in your service
 ![AF Connect Module consent flow diagram](https://github.com/MagnumOpuses/af-connect-module/blob/master/.github/screenshots/af-connect-consent-flow-diagram-v2.png?raw=true)
 
 ## Getting started
+[Using docker](#using-docker)\
+[AF-Connect integration environment](#af-connect-integration-environment)\
+[Create a basic front-end example](#basic-front-end-example)
+[Configuration](#configuration)
 
+
+### Using Docker 
 We provide a docker release package for you to easily run the entire AF-Connect system locally in your development machine and effectively allowing you to both experience and evaluate whether this integration brings value to your service.
 
 First and foremost, add the following host to your local `hosts` file:
@@ -27,7 +34,18 @@ First and foremost, add the following host to your local `hosts` file:
 ```
 
 Download the docker release package from [af-connect-compose](https://github.com/MagnumOpuses/af-connect-compose), unpack the archive and start up all the pre-configured services with command: `docker-compose up`.
+### AF-Connect integration environment
+Jobtechdev provide an example webpage and api endpoints for test and evaluation.\
+Demo page: https://af-connect-demo.jobtechdev.se \
+In order to implement your own webpage with AF-connect-module you have to use the configuration below you could let other config values to be defaults
+Read more about how to configure ad-connect-module  [Configuration](#configuration) Use the configuration below for the integration environment.
 
+| Configuration property      | Af-connect integration env.                      | Description                                           
+| --------------------------- | ------------------------------------------------ | ---------------------------------- |
+| data-af_connect_url         | https://af-connect-int.jobtechdev.se             | se [Configuration](#configuration)|
+| data-af_portability_url     | https://af-portability-int.jobtechdev.se         | se [Configuration](#configuration)|
+| data-af_portability_api_key |dummydummydummydummydummydummydummydummydummydummy| se [Configuration](#configuration)|
+### Basic front-end example 
 Now let's create a basic front-end example that utilizes the AF-Connect-Module.
 
 Create a new directory in your filesystem and add a new file `index.html` with the following content:
@@ -119,17 +137,6 @@ npm run test
 
 ## Deployment
 
-We recommend deploying the AF-Connect system locally to your development machine using `docker-compose`.
-
-```
-docker-compose instructions goes here...
-```
-
-## AF-Connect integration environment
-
-Integration environment: `test-afc.jobtechdev.se`
-
-Guidelines for connecting to AF-Connect integration environment coming soon...
 
 ## Built with
 
@@ -138,7 +145,7 @@ Guidelines for connecting to AF-Connect integration environment coming soon...
 
 ## Versions, current dev state and future
 
-No versions yet.
+1.0.0-beta1
 
 ## Contributing
 
