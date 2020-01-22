@@ -70,7 +70,7 @@ First and foremost, add the following host to your local `hosts` file:
 
 Download the docker release package from [af-connect-compose](https://github.com/MagnumOpuses/af-connect-compose), unpack the archive and start up all the pre-configured services with command: `docker-compose up`.
 
-When all docker containers have started up, visit your locally hosted demo site at: <a href="https://af-connect-demo.jobtechdev.se" target="_blank">https://af-connect.local:3000</a>
+When all docker images have started up, visit your locally hosted demo site at: <a href="http://af-connect.local:3000" target="_blank">http://af-connect.local:3000</a>
 
 ### Basic front-end example
 
