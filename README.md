@@ -41,7 +41,7 @@ A jobseeker fills out a job application form automatically by using AF-Connect.
 
 ![AF Connect user journey diagram v1](.github/screenshots/af-connect-user-journey-diagram-v1.png?raw=true)
 
-Use the following test credentials listed below and experience the live demo here: <a href="https://af-connect-demo.jobtechdev.se" target="_blank">https://af-connect-demo.jobtechdev.se</a>
+Use the following test credentials listed below and experience the live demo here: [https://af-connect-demo.jobtechdev.se](https://af-connect-demo.jobtechdev.se)
 
 ```
 Username: abc
@@ -70,7 +70,7 @@ First and foremost, add the following host to your local `hosts` file:
 
 Download the docker release package from [af-connect-compose](https://github.com/MagnumOpuses/af-connect-compose), unpack the archive and start up all the pre-configured services with command: `docker-compose up`.
 
-When all docker images have started up, visit your locally hosted demo site at: <a href="http://af-connect.local:3000" target="_blank">http://af-connect.local:3000</a>
+When all docker images have started up, visit your locally hosted demo site at: [http://af-connect.local:3000](http://af-connect.local:3000)
 
 ### Basic front-end example
 
