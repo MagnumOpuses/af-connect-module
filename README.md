@@ -8,16 +8,34 @@
 
 ## Introduction
 
-The purpose of this module is to enable third-party systems to easily integrate with Arbetsförmedlingen's AF-Connect infrastructure in order to obtain data/documents/certificates related to registered jobseekers and/or employers with their explicit consent.
+The purpose of this module is to enable third-party services to easily integrate with Arbetsförmedlingen's AF-Connect infrastructure in order to obtain data/documents/certificates related to registered jobseekers and/or employers with their explicit consent.
 
-This module provides an interactive button which you may install in your service's frontend. The end-user/visitor can then initiate the Arbetsförmedlingen user authentication procedure, select their profile/CV to share and finally provide their explicit consent allowing this data to be shared with and retrieved by a third-party system.\
-See how it all works, visit example webpage <a href="https://af-connect-demo.jobtechdev.se" target="_blank">https://af-connect-demo.jobtechdev.se</a>
+This module provides an interactive button for you to install into your own service by following the guidelines below.
 
-## Sequence diagram showing all interactions of this module.
+Once you've successfully installed this module, your website visitor(s) can initiate transaction of their personal data to your service by clicking the AF-Connect button.
 
-![AF Connect Module sequence diagram](https://github.com/MagnumOpuses/af-connect-module/blob/master/.github/screenshots/af-connect-module-sequence-diagram-v2.png?raw=true)
+When the user initiates the transaction of data, a new window will open up for the user to authenticate at Arbetsförmedlingen's website, select their profile/CV to share and finally provide their explicit consent allowing this data to be shared with the third-party service.
 
-![AF Connect Module consent flow diagram](https://github.com/MagnumOpuses/af-connect-module/blob/master/.github/screenshots/af-connect-consent-flow-diagram-v2.png?raw=true)
+### Live use-case demo
+
+A jobseeker fills out a job application form automatically by using AF-Connect.
+
+![AF Connect user journey diagram v1](.github/screenshots/af-connect-user-journey-diagram-v1.png?raw=true)
+
+Use the following test credentials listed below and experience the live demo here: <a href="https://af-connect-demo.jobtechdev.se" target="_blank">https://af-connect-demo.jobtechdev.se</a>
+
+```
+Username: abc
+Password: 123
+```
+
+### AF-Connect communication diagram
+
+![AF Connect communication diagram v3](.github/screenshots/af-connect-communication-diagram-v3.png?raw=true)
+
+### AF-Connect Module sequence diagram
+
+![AF Connect Module sequence diagram v2](.github/screenshots/af-connect-module-sequence-diagram-v2.png?raw=true)
 
 ## Getting started
 
@@ -28,7 +46,7 @@ See how it all works, visit example webpage <a href="https://af-connect-demo.job
 
 ### Using Docker
 
-We provide a docker release package for you to easily run the entire AF-Connect system locally in your development machine and effectively allowing you to both experience and evaluate whether this integration brings value to your service.
+We provide a docker release package for you to easily run the entire AF-Connect system locally in your development machine and effectively allowing you to both experience and evaluate whether this integration brings value to your product/service.
 
 First and foremost, add the following host to your local `hosts` file:
 
@@ -38,18 +56,7 @@ First and foremost, add the following host to your local `hosts` file:
 
 Download the docker release package from [af-connect-compose](https://github.com/MagnumOpuses/af-connect-compose), unpack the archive and start up all the pre-configured services with command: `docker-compose up`.
 
-### AF-Connect integration environment
-
-Jobtechdev provide an example webpage and api endpoints for test and evaluation.\
-Demo page: https://af-connect-demo.jobtechdev.se \
-In order to implement your own webpage with AF-connect-module you have to use the configuration below you could let other config values to be defaults
-Read more about how to configure ad-connect-module [Configuration](#configuration) Use the configuration below for the integration environment.
-
-| Configuration property      | Af-connect integration env.                        | Description                        |
-| --------------------------- | -------------------------------------------------- | ---------------------------------- |
-| data-af_connect_url         | https://af-connect-int.jobtechdev.se               | se [Configuration](#configuration) |
-| data-af_portability_url     | https://af-portability-int.jobtechdev.se           | se [Configuration](#configuration) |
-| data-af_portability_api_key | dummydummydummydummydummydummydummydummydummydummy | se [Configuration](#configuration) |
+When all docker containers have started up, visit your locally hosted demo site at: <a href="https://af-connect-demo.jobtechdev.se" target="_blank">https://af-connect.local:3000</a>
 
 ### Basic front-end example
 
@@ -85,22 +92,34 @@ The example consists of three parts.
 
 Download and unpack the latest version of the AF Connect Module from the [Releases section](https://github.com/MagnumOpuses/af-connect-module/releases). Copy the `af-connect-module.bundle.js` into the directory where your `index.html` resides.
 
-Finally open up the `index.html` in a web browser of your choice and you'll find a blue "AF Connect" button.
+Finally open up the `index.html` in your web browser and you'll find a blue "AF Connect" button.
 
 ![Example implementation result screenshot](https://github.com/MagnumOpuses/af-connect-module/blob/master/.github/screenshots/af-connect-module-button.png?raw=true)
 
-By clicking the "AF Connect" button, a new tab/window will open up to show you an authentication page. This page is operatig entirely on mocked data, so to complete the authentication you can enter the following credentials:
+By clicking the "AF Connect" button, a new tab/window will open up to show you an authentication page. This page is operating on mocked user data. To complete the authentication procedure, enter the following user credentials:
 
 ```
-username: abc
-password: 123
+Username: abc
+Password: 123
 ```
 
-You will now be presented with a handful of example profiles that you may select to share with the requesting service and finally click the "Consent and close" button. The page closes and you're back to the initial example page.
+Upon successful authentication a handful of example profiles are presented to you. Please select the profile you wish to share with the third-party service and finally click the "Consent and close" button. The AF-Connect page closes and you're back to your `index.html` page again.
 
-Open up the browser developer tools console and you will see that the `onResponse` callback have been called and the retrieved envelope has been logged.
+Open up the browser developer tools console and you will see that the `onResponse` callback have been called, and the retrieved envelope has been logged to the console.
 
 :notebook: _Notice: Multiple AF Connect Modules can be added to a page through duplication of the DOM element._
+
+### AF-Connect integration environment
+
+In order to integrate your own website with AF-Connect integration environment you must apply/adjust the configuration properties as listed below.
+
+| Configuration property      | Af-connect integration env.                        | Description                        |
+| --------------------------- | -------------------------------------------------- | ---------------------------------- |
+| data-af_connect_url         | https://af-connect-int.jobtechdev.se               | se [Configuration](#configuration) |
+| data-af_portability_url     | https://af-portability-int.jobtechdev.se           | se [Configuration](#configuration) |
+| data-af_portability_api_key | dummydummydummydummydummydummydummydummydummydummy | se [Configuration](#configuration) |
+
+Find all available configuration properties in section: [Configuration](#configuration)
 
 ## Configuration
 
@@ -111,22 +130,22 @@ Here's an example for how you can reduce the data polling rate to just once per 
 ```html
 <div
   class="af-connect-module"
-  data-poll_rate="10000"
   data-on_response="onResponse"
+  data-poll_rate="10000"
 ></div>
 ```
 
 The table below shows all available configuration properties, default values and usage description.
 
-| Configuration property      | Default value                                | Description                                                                          |
-| --------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------ |
-| data-label                  | AF Connect                                   | Label displayed on the AF Connect Module interactive button.                         |
-| data-poll_rate              | 1000                                         | Data polling frequency, described in milliseconds.                                   |
-| data-poll_timeout           | 300000                                       | Data polling timeout, described in milliseconds.                                     |
-| data-af_connect_url         | https://af-connect.local                     | URL to AF-Connect service to open in new tab/window when the user clicks the button. |
-| data-af_portability_url     | http://af-connect.local:8080/portability-api | URL to service where session token and user data can be obtained.                    |
-| data-af_portability_api_key | undefined                                    | The API key used when querying for session token and polling for data.               |
-| data-on_response            | undefined                                    | Name of global callback function to call upon polling success/failure.               |
+| Configuration property      | Default value                                      | Description                                                                          |
+| --------------------------- | -------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| data-label                  | AF Connect                                         | Label displayed on the AF Connect Module interactive button.                         |
+| data-poll_rate              | 1000                                               | Data polling frequency, described in milliseconds.                                   |
+| data-poll_timeout           | 300000                                             | Data polling timeout, described in milliseconds.                                     |
+| data-af_connect_url         | https://af-connect.local                           | URL to AF-Connect service to open in new tab/window when the user clicks the button. |
+| data-af_portability_url     | http://af-connect.local:8080                       | URL to service where session token and user data can be obtained.                    |
+| data-af_portability_api_key | dummydummydummydummydummydummydummydummydummydummy | The API key used when querying for session token and polling for data.               |
+| data-on_response            | undefined                                          | Name of global callback function to call upon polling success/failure.               |
 
 ### Prerequisites
 
