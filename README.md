@@ -70,7 +70,17 @@ First and foremost, add the following host to your local `hosts` file:
 
 Download the docker release package from [af-connect-compose](https://github.com/MagnumOpuses/af-connect-compose), unpack the archive and start up all the pre-configured services with command: `docker-compose up`.
 
-When all docker images have started up, visit your locally hosted demo site at: [http://af-connect.local:3000](http://af-connect.local:3000)
+The following docker images will be installed:
+
+- [jobtechdev/af-connect-demo:latest](https://hub.docker.com/r/jobtechdev/af-connect-demo)
+- [jobtechdev/af-connect:latest](https://hub.docker.com/r/jobtechdev/af-connect)
+- [jobtechdev/af-portability:latest](https://hub.docker.com/r/jobtechdev/af-portability)
+- [jobtechdev/af-connect-outbox:latest](https://hub.docker.com/r/jobtechdev/af-connect-outbox)
+- [jobtechdev/apimanager-mock:latest](https://hub.docker.com/r/jobtechdev/apimanager-mock)
+- [jobtechdev/af-connect-mock:latest](https://hub.docker.com/r/jobtechdev/af-connect-mock)
+- [redis:alpine](https://hub.docker.com/_/redis)
+
+When all docker images have started up, visit your locally hosted AF-Connect Demo site at: [http://af-connect.local:3000](http://af-connect.local:3000)
 
 ### Basic front-end example
 
