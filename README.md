@@ -6,6 +6,25 @@
 
 # AF Connect Module
 
+- [Introduction](#introduction)
+  - [Live use-case demo](#live-use-case-demo)
+  - [AF-Connect communication diagram](#af-connect-communication-diagram)
+  - [AF-Connect Module sequence diagram](#af-connect-module-sequence-diagram)
+- [Getting started](#getting-started)
+  - [Using docker](#using-docker)
+  - [Basic front-end example](#basic-front-end-example)
+- [AF-Connect integration environment](#af-connect-integration-environment)
+- [Configuration](#configuration)
+- [Build from source](#build-from-source)
+- [Test](#test)
+- [Error codes](#error-codes)
+- [Built with](#built-with)
+- [Versions, current dev state and future](#versions-current-dev-state-and-future)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
+
+
 ## Introduction
 
 The purpose of this module is to enable third-party services to easily integrate with Arbetsförmedlingen's AF-Connect infrastructure in order to obtain data/documents/certificates related to registered jobseekers and/or employers with their explicit consent.
@@ -38,11 +57,6 @@ Password: 123
 ![AF Connect Module sequence diagram v2](.github/screenshots/af-connect-module-sequence-diagram-v2.png?raw=true)
 
 ## Getting started
-
-[Using docker](#using-docker)\
-[AF-Connect integration environment](#af-connect-integration-environment)\
-[Create a basic front-end example](#basic-front-end-example)
-[Configuration](#configuration)
 
 ### Using Docker
 
@@ -109,7 +123,7 @@ Open up the browser developer tools console and you will see that the `onRespons
 
 :notebook: _Notice: Multiple AF Connect Modules can be added to a page through duplication of the DOM element._
 
-### AF-Connect integration environment
+## AF-Connect integration environment
 
 In order to integrate your own website with AF-Connect integration environment you must apply/adjust the configuration properties as listed below.
 
@@ -147,11 +161,7 @@ The table below shows all available configuration properties, default values and
 | data-af_portability_api_key | dummydummydummydummydummydummydummydummydummydummy | The API key used when querying for session token and polling for data.               |
 | data-on_response            | undefined                                          | Name of global callback function to call upon polling success/failure.               |
 
-### Prerequisites
-
-No prerequisites guidelines yet.
-
-### Compile the bundle from source
+## Build from source
 
 ```bash
 git clone https://github.com/MagnumOpuses/af-connect-module.git
@@ -165,8 +175,6 @@ npm run build
 ```bash
 npm run test
 ```
-
-## Deployment
 
 ## Error codes
 
