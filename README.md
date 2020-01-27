@@ -24,7 +24,6 @@
 - [License](#license)
 - [Acknowledgments](#acknowledgments)
 
-
 ## Introduction
 
 The purpose of this module is to enable third-party services to easily integrate with Arbetsförmedlingen's AF-Connect infrastructure in order to obtain data/documents/certificates related to registered jobseekers and/or employers with their explicit consent.
@@ -165,6 +164,7 @@ The table below shows all available configuration properties, default values and
 | --------------------------- | -------------------------------------------------- | ------------------------------------------------------------------------------------ |
 | data-label                  | AF Connect                                         | Label displayed on the AF Connect Module interactive button.                         |
 | data-poll_rate              | 1000                                               | Data polling frequency, described in milliseconds.                                   |
+| data-poll_retry             | 10                                                 | Data polling retry maximum count, e.g. if network connectivity has been lost.        |
 | data-poll_timeout           | 300000                                             | Data polling timeout, described in milliseconds.                                     |
 | data-af_connect_url         | https://af-connect.local                           | URL to AF-Connect service to open in new tab/window when the user clicks the button. |
 | data-af_portability_url     | http://af-connect.local:8080                       | URL to service where session token and user data can be obtained.                    |
