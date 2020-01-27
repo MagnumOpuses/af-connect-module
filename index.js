@@ -22,16 +22,6 @@ Array.prototype.forEach.call(containers, container => {
     onResponse: container.getAttribute("data-on_response") || undefined
   };
 
-  const button = document.createElement("button");
-  button.appendChild(document.createTextNode(config.label));
-  button.style["background-color"] = "#3040C4";
-  button.style["color"] = "#eee";
-  button.style["border"] = "0px";
-  button.style["border-radius"] = "3px";
-  button.style["padding"] = "6px 20px";
-  button.style["font-weight"] = "600";
-  button.addEventListener("click", evt => {
-    connectModule.fetchSequence(config);
-  });
+  const button = connectModule.generateButton(config);
   container.appendChild(button);
 });

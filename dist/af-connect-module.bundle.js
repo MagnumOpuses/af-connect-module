@@ -23,17 +23,7 @@ Array.prototype.forEach.call(containers, container => {
     onResponse: container.getAttribute("data-on_response") || undefined
   };
 
-  const button = document.createElement("button");
-  button.appendChild(document.createTextNode(config.label));
-  button.style["background-color"] = "#3040C4";
-  button.style["color"] = "#eee";
-  button.style["border"] = "0px";
-  button.style["border-radius"] = "3px";
-  button.style["padding"] = "6px 20px";
-  button.style["font-weight"] = "600";
-  button.addEventListener("click", evt => {
-    connectModule.fetchSequence(config);
-  });
+  const button = connectModule.generateButton(config);
   container.appendChild(button);
 });
 
@@ -88,7 +78,9 @@ const getEnvelope = (config, session) => {
     });
 };
 
-const fetchSequence = config => {
+const fetchSequence = (config, button) => {
+  button.style["background-color"] = "#AAAAAA";
+  button.setAttribute("disabled", "");
   return getSession(config)
     .then(sessionToken => {
       return new Promise((resolve, reject) => {
@@ -121,15 +113,37 @@ const fetchSequence = config => {
         }, config.timeout);
       });
     })
+    .then(() => {
+      button.style["background-color"] = "#3040C4";
+      button.removeAttribute("disabled");
+    })
     .catch(err => {
       window[config.onResponse].call(undefined, undefined, err);
+      button.style["background-color"] = "#3040C4";
+      button.removeAttribute("disabled");
     });
+};
+
+const generateButton = config => {
+  const button = document.createElement("button");
+  button.appendChild(document.createTextNode(config.label));
+  button.style["background-color"] = "#3040C4";
+  button.style["color"] = "#eee";
+  button.style["border"] = "0px";
+  button.style["border-radius"] = "3px";
+  button.style["padding"] = "6px 20px";
+  button.style["font-weight"] = "600";
+  button.addEventListener("click", evt => {
+    fetchSequence(config, button);
+  });
+  return button;
 };
 
 module.exports = {
   getSession,
   getEnvelope,
-  fetchSequence
+  fetchSequence,
+  generateButton
 };
 
 },{"axios":3}],3:[function(require,module,exports){
