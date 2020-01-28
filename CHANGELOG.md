@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- AF-Connect button now disabled while fetching session and polling for envelope. Button is re-activated upon successful envelope response, received error code or timeout.
+
 ### Added
 
 - New configuration property "data-poll_retry" to set how many poll retry attempts to perform before exiting with error code, by default 10 retries.
