@@ -9,6 +9,7 @@ Array.prototype.forEach.call(containers, container => {
   let config = {
     label: container.getAttribute("data-label") || "AF Connect",
     pollRate: container.getAttribute("data-poll_rate") || "1000", // 1 second
+    pollRetry: container.getAttribute("data-poll_retry") || "10",
     timeout: container.getAttribute("data-poll_timeout") || "300000", // 5 minutes
     afConnectUrl:
       container.getAttribute("data-af_connect_url") ||

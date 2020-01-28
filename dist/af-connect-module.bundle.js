@@ -10,6 +10,7 @@ Array.prototype.forEach.call(containers, container => {
   let config = {
     label: container.getAttribute("data-label") || "AF Connect",
     pollRate: container.getAttribute("data-poll_rate") || "1000", // 1 second
+    pollRetry: container.getAttribute("data-poll_retry") || "10",
     timeout: container.getAttribute("data-poll_timeout") || "300000", // 5 minutes
     afConnectUrl:
       container.getAttribute("data-af_connect_url") ||
@@ -88,10 +89,23 @@ const fetchSequence = (config, button) => {
           .open(config.afConnectUrl + "?sessionToken=" + sessionToken, "_blank")
           .focus();
 
+        let retry = 0;
+        let retryMax = config.pollRetry;
+
         let timeoutId;
+        let awaitingResponse = false;
         const timerId = setInterval(() => {
+          // Only poll for envelope if there are no ongoing request.
+          if (awaitingResponse) {
+            return;
+          }
+
+          awaitingResponse = true;
           return getEnvelope(config, sessionToken)
             .then(cv => {
+              awaitingResponse = false;
+              retry = 0;
+
               if (cv !== undefined) {
                 clearInterval(timerId);
                 clearTimeout(timeoutId);
@@ -102,8 +116,15 @@ const fetchSequence = (config, button) => {
               }
             })
             .catch(err => {
-              clearInterval(timerId);
-              reject(err);
+              awaitingResponse = false;
+              if (retry < retryMax) {
+                // Error occurred upon polling for envelope, retrying.
+                retry++;
+              } else {
+                // Too many errors occurred upon polling for envelope, stop polling with error code.
+                clearInterval(timerId);
+                reject(err);
+              }
             });
         }, config.pollRate);
 
