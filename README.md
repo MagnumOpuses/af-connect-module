@@ -136,11 +136,11 @@ Open up the browser developer tools console and you will see that the `onRespons
 
 In order to integrate your own website with AF-Connect integration environment you must apply/adjust the configuration properties as listed below.
 
-| Configuration property      | Af-connect integration env.                        | Description                        |
-| --------------------------- | -------------------------------------------------- | ---------------------------------- |
-| data-af_connect_url         | https://af-connect-int.jobtechdev.se               | se [Configuration](#configuration) |
-| data-af_portability_url     | https://af-portability-int.jobtechdev.se           | se [Configuration](#configuration) |
-| data-af_portability_api_key | dummydummydummydummydummydummydummydummydummydummy | se [Configuration](#configuration) |
+| Configuration property      | Af-connect integration env.              | Description                        |
+| --------------------------- | ---------------------------------------- | ---------------------------------- |
+| data-af_connect_url         | https://af-connect-int.jobtechdev.se     | se [Configuration](#configuration) |
+| data-af_portability_url     | https://af-portability-int.jobtechdev.se | se [Configuration](#configuration) |
+| data-af_portability_api_key | dummykey                                 | se [Configuration](#configuration) |
 
 Find all available configuration properties in section: [Configuration](#configuration)
 
@@ -160,16 +160,16 @@ Here's an example for how you can reduce the data polling rate to just once per 
 
 The table below shows all available configuration properties, default values and usage description.
 
-| Configuration property      | Default value                                      | Description                                                                          |
-| --------------------------- | -------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| data-label                  | AF Connect                                         | Label displayed on the AF Connect Module interactive button.                         |
-| data-poll_rate              | 1000                                               | Data polling frequency, described in milliseconds.                                   |
-| data-poll_retry             | 10                                                 | Data polling retry maximum count, e.g. if network connectivity has been lost.        |
-| data-poll_timeout           | 300000                                             | Data polling timeout, described in milliseconds.                                     |
-| data-af_connect_url         | https://af-connect.local                           | URL to AF-Connect service to open in new tab/window when the user clicks the button. |
-| data-af_portability_url     | http://af-connect.local:8080                       | URL to service where session token and user data can be obtained.                    |
-| data-af_portability_api_key | dummydummydummydummydummydummydummydummydummydummy | The API key used when querying for session token and polling for data.               |
-| data-on_response            | undefined                                          | Name of global callback function to call upon polling success/failure.               |
+| Configuration property      | Default value                | Description                                                                          |
+| --------------------------- | ---------------------------- | ------------------------------------------------------------------------------------ |
+| data-label                  | AF Connect                   | Label displayed on the AF Connect Module interactive button.                         |
+| data-poll_rate              | 1000                         | Data polling frequency, described in milliseconds.                                   |
+| data-poll_retry             | 10                           | Data polling retry maximum count, e.g. if network connectivity has been lost.        |
+| data-poll_timeout           | 300000                       | Data polling timeout, described in milliseconds.                                     |
+| data-af_connect_url         | https://af-connect.local     | URL to AF-Connect service to open in new tab/window when the user clicks the button. |
+| data-af_portability_url     | http://af-connect.local:8080 | URL to service where session token and user data can be obtained.                    |
+| data-af_portability_api_key | dummykey                     | The API key used when querying for session token and polling for data.               |
+| data-on_response            | undefined                    | Name of global callback function to call upon polling success/failure.               |
 
 ## Build from source
 

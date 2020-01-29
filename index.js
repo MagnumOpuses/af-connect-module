@@ -18,8 +18,7 @@ Array.prototype.forEach.call(containers, container => {
       container.getAttribute("data-af_portability_url") ||
       "http://af-connect.local:8080",
     afPortabilityApiKey:
-      container.getAttribute("data-af_portability_api_key") ||
-      "dummydummydummydummydummydummydummydummydummydummy",
+      container.getAttribute("data-af_portability_api_key") || "dummykey",
     onResponse: container.getAttribute("data-on_response") || undefined
   };
 
