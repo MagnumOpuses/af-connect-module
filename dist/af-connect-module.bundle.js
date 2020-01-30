@@ -10,6 +10,7 @@ Array.prototype.forEach.call(containers, container => {
   let config = {
     label: container.getAttribute("data-label") || "AF Connect",
     pollRate: container.getAttribute("data-poll_rate") || "1000", // 1 second
+    pollRetry: container.getAttribute("data-poll_retry") || "10",
     timeout: container.getAttribute("data-poll_timeout") || "300000", // 5 minutes
     afConnectUrl:
       container.getAttribute("data-af_connect_url") ||
@@ -18,22 +19,11 @@ Array.prototype.forEach.call(containers, container => {
       container.getAttribute("data-af_portability_url") ||
       "http://af-connect.local:8080",
     afPortabilityApiKey:
-      container.getAttribute("data-af_portability_api_key") ||
-      "dummydummydummydummydummydummydummydummydummydummy",
+      container.getAttribute("data-af_portability_api_key") || "dummykey",
     onResponse: container.getAttribute("data-on_response") || undefined
   };
 
-  const button = document.createElement("button");
-  button.appendChild(document.createTextNode(config.label));
-  button.style["background-color"] = "#3040C4";
-  button.style["color"] = "#eee";
-  button.style["border"] = "0px";
-  button.style["border-radius"] = "3px";
-  button.style["padding"] = "6px 20px";
-  button.style["font-weight"] = "600";
-  button.addEventListener("click", evt => {
-    connectModule.fetchSequence(config);
-  });
+  const button = connectModule.generateButton(config);
   container.appendChild(button);
 });
 
@@ -88,7 +78,9 @@ const getEnvelope = (config, session) => {
     });
 };
 
-const fetchSequence = config => {
+const fetchSequence = (config, button) => {
+  button.style["background-color"] = "#AAAAAA";
+  button.setAttribute("disabled", "");
   return getSession(config)
     .then(sessionToken => {
       return new Promise((resolve, reject) => {
@@ -96,10 +88,23 @@ const fetchSequence = config => {
           .open(config.afConnectUrl + "?sessionToken=" + sessionToken, "_blank")
           .focus();
 
+        let retry = 0;
+        let retryMax = config.pollRetry;
+
         let timeoutId;
+        let awaitingResponse = false;
         const timerId = setInterval(() => {
+          // Only poll for envelope if there are no ongoing request.
+          if (awaitingResponse) {
+            return;
+          }
+
+          awaitingResponse = true;
           return getEnvelope(config, sessionToken)
             .then(cv => {
+              awaitingResponse = false;
+              retry = 0;
+
               if (cv !== undefined) {
                 clearInterval(timerId);
                 clearTimeout(timeoutId);
@@ -110,8 +115,15 @@ const fetchSequence = config => {
               }
             })
             .catch(err => {
-              clearInterval(timerId);
-              reject(err);
+              awaitingResponse = false;
+              if (retry < retryMax) {
+                // Error occurred upon polling for envelope, retrying.
+                retry++;
+              } else {
+                // Too many errors occurred upon polling for envelope, stop polling with error code.
+                clearInterval(timerId);
+                reject(err);
+              }
             });
         }, config.pollRate);
 
@@ -121,15 +133,37 @@ const fetchSequence = config => {
         }, config.timeout);
       });
     })
+    .then(() => {
+      button.style["background-color"] = "#3040C4";
+      button.removeAttribute("disabled");
+    })
     .catch(err => {
       window[config.onResponse].call(undefined, undefined, err);
+      button.style["background-color"] = "#3040C4";
+      button.removeAttribute("disabled");
     });
+};
+
+const generateButton = config => {
+  const button = document.createElement("button");
+  button.appendChild(document.createTextNode(config.label));
+  button.style["background-color"] = "#3040C4";
+  button.style["color"] = "#eee";
+  button.style["border"] = "0px";
+  button.style["border-radius"] = "3px";
+  button.style["padding"] = "6px 20px";
+  button.style["font-weight"] = "600";
+  button.addEventListener("click", evt => {
+    fetchSequence(config, button);
+  });
+  return button;
 };
 
 module.exports = {
   getSession,
   getEnvelope,
-  fetchSequence
+  fetchSequence,
+  generateButton
 };
 
 },{"axios":3}],3:[function(require,module,exports){
