@@ -160,16 +160,18 @@ Here's an example for how you can reduce the data polling rate to just once per 
 
 The table below shows all available configuration properties, default values and usage description.
 
-| Configuration property      | Default value                | Description                                                                          |
-| --------------------------- | ---------------------------- | ------------------------------------------------------------------------------------ |
-| data-label                  | AF Connect                   | Label displayed on the AF Connect Module interactive button.                         |
-| data-poll_rate              | 1000                         | Data polling frequency, described in milliseconds.                                   |
-| data-poll_retry             | 10                           | Data polling retry maximum count, e.g. if network connectivity has been lost.        |
-| data-poll_timeout           | 300000                       | Data polling timeout, described in milliseconds.                                     |
-| data-af_connect_url         | https://af-connect.local     | URL to AF-Connect service to open in new tab/window when the user clicks the button. |
-| data-af_portability_url     | http://af-connect.local:8080 | URL to service where session token and user data can be obtained.                    |
-| data-af_portability_api_key | dummykey                     | The API key used when querying for session token and polling for data.               |
-| data-on_response            | undefined                    | Name of global callback function to call upon polling success/failure.               |
+| Configuration property      | Default value                     | Description                                                                          |
+| --------------------------- | --------------------------------- | ------------------------------------------------------------------------------------ |
+| data-label                  | AF Connect                        | Label displayed on the AF Connect Module interactive button.                         |
+| data-poll_rate              | 1000                              | Data polling frequency, described in milliseconds.                                   |
+| data-poll_retry             | 10                                | Data polling retry maximum count, e.g. if network connectivity has been lost.        |
+| data-poll_timeout           | 300000                            | Data polling timeout, described in milliseconds.                                     |
+| data-af_connect_url         | https://af-connect.local          | URL to AF-Connect service to open in new tab/window when the user clicks the button. |
+| data-af_portability_url     | http://af-connect.local:8080      | URL to service where session token and user data can be obtained.                    |
+| data-af_portability_api_key | dummykey                          | The API key used when querying for session token and polling for data.               |
+| data-on_response            | undefined                         | Name of global callback function to call upon polling success/failure.               |
+| data-on_warning             | `(code) => { console.warn(code)}` | Name of global callback function to call upon warning occurrence.                    |
+| data-suppress_warnings      | false                             | Prevents warnings from being printed to console                                      |
 
 ## Build from source
 
@@ -188,12 +190,16 @@ npm run test
 
 ## Error codes
 
-| Code | Message                       |
-| ---- | ----------------------------- |
-| E001 | Failed to fetch session token |
-| E002 | Failed to fetch envelope      |
-| E003 | Polling interval exception    |
-| E004 | Polling interval timeout      |
+| Code | Message                                                                       |
+| ---- | ----------------------------------------------------------------------------- |
+| E001 | Failed to fetch session token                                                 |
+| E002 | Failed to fetch envelope                                                      |
+| E003 | Polling interval exception                                                    |
+| E004 | Polling interval timeout                                                      |
+| E005 | Detected AF Connect Module incompatability with remote AF Portability service |
+| E006 | Detected AF Connect Module incompatability with remote AF Connect service     |
+| E007 | Compatability check with remote AF Connect service failed                     |
+| E008 | Compatability check with remote AF Portability service failed                 |
 
 ## Built with
 

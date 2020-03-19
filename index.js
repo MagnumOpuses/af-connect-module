@@ -19,9 +19,34 @@ Array.prototype.forEach.call(containers, container => {
       "http://af-connect.local:8080",
     afPortabilityApiKey:
       container.getAttribute("data-af_portability_api_key") || "dummykey",
-    onResponse: container.getAttribute("data-on_response") || undefined
+    onResponse: container.getAttribute("data-on_response") || undefined,
+    onWarning:
+      container.getAttribute("data-on_warning") ||
+      (code => {
+        console.warn(code);
+      }),
+    supressWarnings: container.getAttribute("data-suppress_warnings") || false
   };
 
   const button = connectModule.generateButton(config);
   container.appendChild(button);
+
+  fetch(
+    config.afConnectUrl +
+      "/checkCompatability?name=af-connect-module&version=1.0.2-beta",
+    {
+      method: "GET",
+      mode: "cors"
+    }
+  )
+    .then(response => {
+      return response.json();
+    })
+    .then(body => {
+      if (body.result === false) {
+        if (!config.supressWarnings) {
+          config.onWarning(connectModule.CODE.E006);
+        }
+      }
+    });
 });
