@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Error codes: E005, E006, E007, E008
 - Call to AF-Connect /checkCompatability upon start/initialization of this module.
+- Call to AF-Portability /checkCompatability upon start/initialization of this module.
 - New configuration property 'data-on_warning' for callback upon warning.
 - New configuration property 'data-supress_warnings' to disable most warning messages.
 
