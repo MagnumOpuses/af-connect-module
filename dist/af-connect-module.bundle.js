@@ -3,11 +3,29 @@
 
 const connectModule = require("./lib/connect-module");
 
+const checkCompatability = (host, name, version, onIncompatible) => {
+  const url = `${host}/checkCompatability?name=${name}&version=${version}`;
+  return fetch(url, {
+    method: "GET",
+    mode: "cors"
+  })
+    .then(response => response.json())
+    .then(body => {
+      if (body.result === false) {
+        if (onIncompatible !== undefined) {
+          onIncompatible();
+        }
+      }
+    });
+};
+
 const containers = document.getElementsByClassName("af-connect-module");
 Array.prototype.forEach.call(containers, container => {
   container.style["display"] = "inline";
 
   let config = {
+    name: "af-connect-module",
+    version: "1.0.2-beta",
     label: container.getAttribute("data-label") || "AF Connect",
     pollRate: container.getAttribute("data-poll_rate") || "1000", // 1 second
     pollRetry: container.getAttribute("data-poll_retry") || "10",
@@ -32,24 +50,24 @@ Array.prototype.forEach.call(containers, container => {
   const button = connectModule.generateButton(config);
   container.appendChild(button);
 
-  fetch(
-    config.afConnectUrl +
-      "/checkCompatability?name=af-connect-module&version=1.0.2-beta",
-    {
-      method: "GET",
-      mode: "cors"
+  // Check compatability with remote af connect service
+  checkCompatability(config.afConnectUrl, config.name, config.version, () => {
+    if (!config.supressWarnings) {
+      config.onWarning(connectModule.CODE.E006);
     }
-  )
-    .then(response => {
-      return response.json();
-    })
-    .then(body => {
-      if (body.result === false) {
-        if (!config.supressWarnings) {
-          config.onWarning(connectModule.CODE.E006);
-        }
+  });
+
+  // Check compatability with remote af portability service
+  checkCompatability(
+    config.afPortabilityUrl,
+    config.name,
+    config.version,
+    () => {
+      if (!config.supressWarnings) {
+        config.onWarning(connectModule.CODE.E005);
       }
-    });
+    }
+  );
 });
 
 },{"./lib/connect-module":2}],2:[function(require,module,exports){
