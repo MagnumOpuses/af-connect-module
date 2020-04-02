@@ -24,7 +24,7 @@ Array.prototype.forEach.call(containers, container => {
 
   let config = {
     name: "af-connect-module",
-    version: "1.0.2-beta",
+    version: "1.1.0-beta",
     label: container.getAttribute("data-label") || "AF Connect",
     pollRate: container.getAttribute("data-poll_rate") || "1000", // 1 second
     pollRetry: container.getAttribute("data-poll_retry") || "10",

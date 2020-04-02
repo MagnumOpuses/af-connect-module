@@ -208,7 +208,7 @@ npm run test
 
 ## Versions, current dev state and future
 
-1.0.2-beta
+1.1.0-beta
 
 ## Contributing
 
