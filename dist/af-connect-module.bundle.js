@@ -3,11 +3,29 @@
 
 const connectModule = require("./lib/connect-module");
 
+const checkCompatability = (host, name, version, onIncompatible) => {
+  const url = `${host}/checkCompatability?name=${name}&version=${version}`;
+  return fetch(url, {
+    method: "GET",
+    mode: "cors"
+  })
+    .then(response => response.json())
+    .then(body => {
+      if (body.result === false) {
+        if (onIncompatible !== undefined) {
+          onIncompatible();
+        }
+      }
+    });
+};
+
 const containers = document.getElementsByClassName("af-connect-module");
 Array.prototype.forEach.call(containers, container => {
   container.style["display"] = "inline";
 
   let config = {
+    name: "af-connect-module",
+    version: "1.1.0-beta",
     label: container.getAttribute("data-label") || "AF Connect",
     pollRate: container.getAttribute("data-poll_rate") || "1000", // 1 second
     pollRetry: container.getAttribute("data-poll_retry") || "10",
@@ -20,11 +38,36 @@ Array.prototype.forEach.call(containers, container => {
       "http://af-connect.local:8080",
     afPortabilityApiKey:
       container.getAttribute("data-af_portability_api_key") || "dummykey",
-    onResponse: container.getAttribute("data-on_response") || undefined
+    onResponse: container.getAttribute("data-on_response") || undefined,
+    onWarning:
+      container.getAttribute("data-on_warning") ||
+      (code => {
+        console.warn(code);
+      }),
+    supressWarnings: container.getAttribute("data-suppress_warnings") || false
   };
 
   const button = connectModule.generateButton(config);
   container.appendChild(button);
+
+  // Check compatability with remote af connect service
+  checkCompatability(config.afConnectUrl, config.name, config.version, () => {
+    if (!config.supressWarnings) {
+      config.onWarning(connectModule.CODE.E006);
+    }
+  });
+
+  // Check compatability with remote af portability service
+  checkCompatability(
+    config.afPortabilityUrl,
+    config.name,
+    config.version,
+    () => {
+      if (!config.supressWarnings) {
+        config.onWarning(connectModule.CODE.E005);
+      }
+    }
+  );
 });
 
 },{"./lib/connect-module":2}],2:[function(require,module,exports){
@@ -36,7 +79,25 @@ const ERROR_CODES = {
   E001: { code: "E001", message: "Failed to fetch session token" },
   E002: { code: "E002", message: "Failed to fetch envelope" },
   E003: { code: "E003", message: "Polling interval exception" },
-  E004: { code: "E004", message: "Polling interval timeout" }
+  E004: { code: "E004", message: "Polling interval timeout" },
+  E005: {
+    code: "E005",
+    message:
+      "Detected AF Connect Module incompatability with remote AF Portability service"
+  },
+  E006: {
+    code: "E006",
+    message:
+      "Detected AF Connect Module incompatability with remote AF Connect service"
+  },
+  E007: {
+    code: "E007",
+    message: "Compatability check with remote AF Connect service failed"
+  },
+  E008: {
+    code: "E008",
+    message: "Compatability check with remote AF Portability service failed"
+  }
 };
 
 const getSession = config => {
@@ -144,6 +205,41 @@ const fetchSequence = (config, button) => {
     });
 };
 
+const checkCompatability = config => {
+  console.log("Checking compatability...");
+
+  const checks = [];
+
+  // Check compatability with portability
+  checks.push(
+    axios
+      .get(config.afPortabilityUrl + "/actuator/health")
+      .then(response => {
+        return response.data;
+      })
+      .catch(err => {
+        throw ERROR_CODES.E005;
+      })
+  );
+
+  // Check compatability with af-connect
+  checks.push(
+    axios
+      .get("http://af-connect.local:9801/health")
+      .then(response => {
+        return response.data;
+      })
+      .catch(err => {
+        throw ERROR_CODES.E006;
+      })
+  );
+
+  // Run all checks
+  return Promise.all(checks).then(result => {
+    console.log("All checks ran, result: ", result);
+  });
+};
+
 const generateButton = config => {
   const button = document.createElement("button");
   button.appendChild(document.createTextNode(config.label));
@@ -160,6 +256,7 @@ const generateButton = config => {
 };
 
 module.exports = {
+  CODE: ERROR_CODES,
   getSession,
   getEnvelope,
   fetchSequence,
