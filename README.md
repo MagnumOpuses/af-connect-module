@@ -136,11 +136,11 @@ Open up the browser developer tools console and you will see that the `onRespons
 
 In order to integrate your own website with AF-Connect integration environment you must apply/adjust the configuration properties as listed below.
 
-| Configuration property      | Af-connect integration env.              | Description                        |
-| --------------------------- | ---------------------------------------- | ---------------------------------- |
-| data-af_connect_url         | https://af-connect-int.jobtechdev.se     | se [Configuration](#configuration) |
-| data-af_portability_url     | https://af-portability-int.jobtechdev.se | se [Configuration](#configuration) |
-| data-af_portability_api_key | dummykey                                 | se [Configuration](#configuration) |
+| Configuration property      | Af-connect integration env.                   | Description                        |
+| --------------------------- | ----------------------------------------------| ---------------------------------- |
+| data-af_connect_url         | https://af-connect.test.services.jtech.se     | se [Configuration](#configuration) |
+| data-af_portability_url     | https://af-portability.test.services.jtech.se | se [Configuration](#configuration) |
+| data-af_portability_api_key | dummykey                                      | se [Configuration](#configuration) |
 
 Find all available configuration properties in section: [Configuration](#configuration)
 
