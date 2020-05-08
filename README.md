@@ -40,7 +40,7 @@ A jobseeker fills out a job application form automatically by using AF-Connect.
 
 ![AF Connect user journey diagram v1](.github/screenshots/af-connect-user-journey-diagram-v1.png?raw=true)
 
-Use the following test credentials listed below and experience the live demo here: [https://demo-af-connect-mock.prod.services.jtech.se/](https://af-connect-demo.jobtechdev.se)
+Use the following test credentials listed below and experience the live demo here: [https://demo-af-connect-mock.prod.services.jtech.se/](https://demo-af-connect-mock.prod.services.jtech.se/)
 
 ```
 Username: abc
