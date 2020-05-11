@@ -163,6 +163,7 @@ The table below shows all available configuration properties, default values and
 | Configuration property      | Default value                     | Description                                                                          |
 | --------------------------- | --------------------------------- | ------------------------------------------------------------------------------------ |
 | data-label                  | AF Connect                        | Label displayed on the AF Connect Module interactive button.                         |
+| data-purpose                | []                                | Purpose of data request statement(s). Base64 encoded array of strings.               |
 | data-poll_rate              | 1000                              | Data polling frequency, described in milliseconds.                                   |
 | data-poll_retry             | 10                                | Data polling retry maximum count, e.g. if network connectivity has been lost.        |
 | data-poll_timeout           | 300000                            | Data polling timeout, described in milliseconds.                                     |

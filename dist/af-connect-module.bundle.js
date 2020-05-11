@@ -27,6 +27,7 @@ Array.prototype.forEach.call(containers, container => {
     name: "af-connect-module",
     version: "1.1.0-beta",
     label: container.getAttribute("data-label") || "AF Connect",
+    purpose: container.getAttribute("data-purpose") || undefined,
     pollRate: container.getAttribute("data-poll_rate") || "1000", // 1 second
     pollRetry: container.getAttribute("data-poll_retry") || "10",
     timeout: container.getAttribute("data-poll_timeout") || "300000", // 5 minutes
@@ -103,7 +104,11 @@ const ERROR_CODES = {
 const getSession = config => {
   return axios
     .get(
-      config.afPortabilityUrl + "/token?api-key=" + config.afPortabilityApiKey
+      config.afPortabilityUrl +
+        "/token?api-key=" +
+        config.afPortabilityApiKey +
+        "&purpose=" +
+        config.purpose
     )
     .then(response => {
       return response.data.token;
@@ -205,42 +210,10 @@ const fetchSequence = (config, button) => {
     });
 };
 
-const checkCompatability = config => {
-  console.log("Checking compatability...");
-
-  const checks = [];
-
-  // Check compatability with portability
-  checks.push(
-    axios
-      .get(config.afPortabilityUrl + "/actuator/health")
-      .then(response => {
-        return response.data;
-      })
-      .catch(err => {
-        throw ERROR_CODES.E005;
-      })
-  );
-
-  // Check compatability with af-connect
-  checks.push(
-    axios
-      .get("http://af-connect.local:9801/health")
-      .then(response => {
-        return response.data;
-      })
-      .catch(err => {
-        throw ERROR_CODES.E006;
-      })
-  );
-
-  // Run all checks
-  return Promise.all(checks).then(result => {
-    console.log("All checks ran, result: ", result);
-  });
-};
-
 const generateButton = config => {
+  if (config["purpose"] === undefined) {
+    console.warn("Data request purpose must be defined");
+  }
   const button = document.createElement("button");
   button.appendChild(document.createTextNode(config.label));
   button.style["background-color"] = "#3040C4";
