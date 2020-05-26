@@ -146,6 +146,15 @@ Find all available configuration properties in section: [Configuration](#configu
 
 ## Configuration
 
+You must provide your purpose for requesting data (Base64 encoded JSON array).
+This (`data-purpose`) configuration property is not configurated by default.
+
+```js
+// Example of how to create encode the data-purpose:
+new Buffer(JSON.stringify(["My data request purpose"])).toString("base64");
+// Result: WyJNeSBkYXRhIHJlcXVlc3QgcHVycG9zZSJd
+```
+
 The interactive button comes with pre-defined configuration defaults, but each property may be overridden as you see fit.
 
 Here's an example for how you can reduce the data polling rate to just once per 10 seconds, instead of the default once per second.
@@ -153,6 +162,7 @@ Here's an example for how you can reduce the data polling rate to just once per 
 ```html
 <div
   class="af-connect-module"
+  data-purpose="WyJNeSBkYXRhIHJlcXVlc3QgcHVycG9zZSJd"
   data-on_response="onResponse"
   data-poll_rate="10000"
 ></div>
@@ -163,6 +173,7 @@ The table below shows all available configuration properties, default values and
 | Configuration property      | Default value                     | Description                                                                          |
 | --------------------------- | --------------------------------- | ------------------------------------------------------------------------------------ |
 | data-label                  | AF Connect                        | Label displayed on the AF Connect Module interactive button.                         |
+| data-purpose                | undefined                         | Purpose of data request statement(s). Base64 encoded array of strings.               |
 | data-poll_rate              | 1000                              | Data polling frequency, described in milliseconds.                                   |
 | data-poll_retry             | 10                                | Data polling retry maximum count, e.g. if network connectivity has been lost.        |
 | data-poll_timeout           | 300000                            | Data polling timeout, described in milliseconds.                                     |
