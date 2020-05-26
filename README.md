@@ -149,6 +149,12 @@ Find all available configuration properties in section: [Configuration](#configu
 You must provide your purpose for requesting data (Base64 encoded JSON array).
 This (`data-purpose`) configuration property is not configurated by default.
 
+```js
+// Example of how to create encode the data-purpose:
+new Buffer(JSON.stringify(["My data request purpose"])).toString("base64");
+// Result: WyJNeSBkYXRhIHJlcXVlc3QgcHVycG9zZSJd
+```
+
 The interactive button comes with pre-defined configuration defaults, but each property may be overridden as you see fit.
 
 Here's an example for how you can reduce the data polling rate to just once per 10 seconds, instead of the default once per second.
@@ -156,7 +162,7 @@ Here's an example for how you can reduce the data polling rate to just once per 
 ```html
 <div
   class="af-connect-module"
-  data-purpose="WyJBIGRhdGEgcHJvZ3Jlc3NpbmcgcHVycG9zZSJd"
+  data-purpose="WyJNeSBkYXRhIHJlcXVlc3QgcHVycG9zZSJd"
   data-on_response="onResponse"
   data-poll_rate="10000"
 ></div>
