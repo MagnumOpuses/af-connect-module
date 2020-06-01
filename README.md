@@ -151,7 +151,7 @@ This (`data-purpose`) configuration property is not configurated by default.
 
 ```js
 // Example of how to create encode the data-purpose:
-new Buffer(JSON.stringify(["My data request purpose"])).toString("base64");
+new Buffer.from(JSON.stringify(["My data request purpose"])).toString("base64");
 // Result: WyJNeSBkYXRhIHJlcXVlc3QgcHVycG9zZSJd
 ```
 
