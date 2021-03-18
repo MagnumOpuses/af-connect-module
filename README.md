@@ -153,7 +153,7 @@ There are three parameters provided for customizing the data sharing consent for
 | ----------------- | -------------------------- |
 | data-purpose      | Phrase of intended purpose |
 | data-company_name | Prospective employer       |
-| data-job_role     | The job role applied for   |
+| data-job_title    | The job title applied for  |
 
 The (`data-purpose`) configuration property needs to be formatted as a Base64 encoded JSON array:
 ```js
@@ -184,7 +184,7 @@ The table below shows all available configuration properties, default values and
 | data-label          | AF Connect     | Label displayed on the AF Connect Module interactive button.|
 | data-purpose        | undefined      | Purpose of data request statement(s). Base64 encoded array of strings. |
 | data-company_name   | undefined      | Prospective employer. |
-| data-job_title      | undefined      | Job role to apply for. |
+| data-job_title      | undefined      | Job title to apply for. |
 | data-poll_rate      | 1000           | Data polling frequency, described in milliseconds |
 | data-poll_retry     | 10             | Data polling retry maximum count, e.g. if network connectivity has been lost. |
 | data-poll_timeout   | 300000         | Data polling timeout, described in milliseconds.|
