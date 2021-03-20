@@ -27,6 +27,8 @@ Array.prototype.forEach.call(containers, container => {
     version: "1.1.0-beta",
     label: container.getAttribute("data-label") || "AF Connect",
     purpose: container.getAttribute("data-purpose") || undefined,
+    jobTitle: container.getAttribute("data-job_title") || undefined,
+    companyName: container.getAttribute("data-company_name") || undefined,
     pollRate: container.getAttribute("data-poll_rate") || "1000", // 1 second
     pollRetry: container.getAttribute("data-poll_retry") || "10",
     timeout: container.getAttribute("data-poll_timeout") || "300000", // 5 minutes

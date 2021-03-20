@@ -1,6 +1,4 @@
-![alt text][logo]
-
-[logo]: https://github.com/MagnumOpuses/project-meta/blob/master/img/jobtechdev_black.png "JobTech dev logo"
+![](https://github.com/MagnumOpuses/project-meta/blob/master/img/jobtechdev_black.png?raw=true)
 
 [A JobTech Project](https://www.jobtechdev.se)
 
@@ -146,23 +144,34 @@ Find all available configuration properties in section: [Configuration](#configu
 
 ## Configuration
 
-You must provide your purpose for requesting data (Base64 encoded JSON array).
-This (`data-purpose`) configuration property is not configurated by default.
+In the process of requesting and retrieving user profile data from AF there is a step where the user gives consent for sharing the data to a third party.
+In order for the consent form to be formulated properly three parameters are provided where you can specify key parameters about the data:
 
+There are three parameters provided for customizing the data sharing consent form.
+
+| Custom property   | Description                |
+| ----------------- | -------------------------- |
+| data-purpose      | Phrase of intended purpose |
+| data-company_name | Prospective employer       |
+| data-job_title    | The job title applied for  |
+
+The (`data-purpose`) configuration property needs to be formatted as a Base64 encoded JSON array:
 ```js
 // Example of how to create encode the data-purpose:
-new Buffer.from(JSON.stringify(["My data request purpose"])).toString("base64");
-// Result: WyJNeSBkYXRhIHJlcXVlc3QgcHVycG9zZSJd
+new Buffer.from(JSON.stringify(["Applying for a job at Atlas Copco"])).toString("base64");
+// Result: QXBwbHlpbmcgZm9yIGpvYiBhdCBBdGxhcyBDb3Bjbw==
 ```
-
-The interactive button comes with pre-defined configuration defaults, but each property may be overridden as you see fit.
+The encoded string is displayed in plain text in the consent form to describe the matter to approve.
+The interactive button comes with pre-defined configuration defaults, but each property needs to be specified to describe the purpose that the user is being asked to give consent for.
 
 Here's an example for how you can reduce the data polling rate to just once per 10 seconds, instead of the default once per second.
 
 ```html
 <div
   class="af-connect-module"
-  data-purpose="WyJNeSBkYXRhIHJlcXVlc3QgcHVycG9zZSJd"
+  data-purpose="QXBwbHlpbmcgZm9yIGpvYiBhdCBBdGxhcyBDb3Bjbw=="
+  data-company_name="Atlas Copco"
+  data-job_title="Key Account Manager"
   data-on_response="onResponse"
   data-poll_rate="10000"
 ></div>
@@ -170,19 +179,21 @@ Here's an example for how you can reduce the data polling rate to just once per 
 
 The table below shows all available configuration properties, default values and usage description.
 
-| Configuration property      | Default value                     | Description                                                                          |
-| --------------------------- | --------------------------------- | ------------------------------------------------------------------------------------ |
-| data-label                  | AF Connect                        | Label displayed on the AF Connect Module interactive button.                         |
-| data-purpose                | undefined                         | Purpose of data request statement(s). Base64 encoded array of strings.               |
-| data-poll_rate              | 1000                              | Data polling frequency, described in milliseconds.                                   |
-| data-poll_retry             | 10                                | Data polling retry maximum count, e.g. if network connectivity has been lost.        |
-| data-poll_timeout           | 300000                            | Data polling timeout, described in milliseconds.                                     |
-| data-af_connect_url         | https://af-connect.local          | URL to AF-Connect service to open in new tab/window when the user clicks the button. |
-| data-af_portability_url     | http://af-connect.local:8080      | URL to service where session token and user data can be obtained.                    |
-| data-af_portability_api_key | dummykey                          | The API key used when querying for session token and polling for data.               |
-| data-on_response            | undefined                         | Name of global callback function to call upon polling success/failure.               |
-| data-on_warning             | `(code) => { console.warn(code)}` | Name of global callback function to call upon warning occurrence.                    |
-| data-suppress_warnings      | false                             | Prevents warnings from being printed to console                                      |
+| Property            | Default value  | Description |
+| ------------------- | -------------- | ----------- |
+| data-label          | AF Connect     | Label displayed on the AF Connect Module interactive button.|
+| data-purpose        | undefined      | Purpose of data request statement(s). Base64 encoded array of strings. |
+| data-company_name   | undefined      | Prospective employer. |
+| data-job_title      | undefined      | Job title to apply for. |
+| data-poll_rate      | 1000           | Data polling frequency, described in milliseconds |
+| data-poll_retry     | 10             | Data polling retry maximum count, e.g. if network connectivity has been lost. |
+| data-poll_timeout   | 300000         | Data polling timeout, described in milliseconds.|
+| data-af_connect_url | https://af-connect.local         | URL to F-Connect service to open in new tab/window when the user clicks the button. |
+| data-af_portability_url | http://af-connect.local:8080 | URL to service where session token and user data can be obtained. |
+| data-af_portability_api_key | dummykey | The API key used when querying for session token and polling for data. |
+| data-on_response    | undefined    | Name of global callback function to call upon polling success/failure. |
+| data-on_warning     | `(code) => { console.warn(code)}` | Name of global callback function to call upon warning occurrence. |
+| data-suppress_warnings | false          | Prevents warnings from being printed to console |
 
 ## Build from source
 
@@ -219,7 +230,7 @@ npm run test
 
 ## Versions, current dev state and future
 
-1.1.0-beta
+1.2.0-beta
 
 ## Contributing
 
