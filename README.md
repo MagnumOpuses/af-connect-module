@@ -225,7 +225,7 @@ npm run test
 
 ## Built with
 
-- NPM v6.4.1 (Node package manager)
+- NPM v6.14.12 (Node package manager)
 - Browserify v16.5.0 (Javascript bundler for browser)
 
 ## Versions, current dev state and future
