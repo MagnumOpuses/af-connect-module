@@ -24,11 +24,11 @@ Array.prototype.forEach.call(containers, container => {
 
   let config = {
     name: "af-connect-module",
-    version: "1.1.0-beta",
+    version: "1.2.0-beta",
     label: container.getAttribute("data-label") || "AF Connect",
-    purpose: container.getAttribute("data-purpose") || undefined,
-    jobTitle: container.getAttribute("data-job_title") || undefined,
-    companyName: container.getAttribute("data-company_name") || undefined,
+    purpose: container.getAttribute("data-purpose") || "QW5zw7ZrYW4gb20gam9iYiBzb20gRGlldGlzdCBww6UgS2Fyb2xpbnNrYSBJbnN0aXR1dGV0",
+    jobTitle: container.getAttribute("data-job_title") || "Dietist",
+    companyName: container.getAttribute("data-company_name") || "Karolinska",
     pollRate: container.getAttribute("data-poll_rate") || "1000", // 1 second
     pollRetry: container.getAttribute("data-poll_retry") || "10",
     timeout: container.getAttribute("data-poll_timeout") || "300000", // 5 minutes
