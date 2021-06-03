@@ -27,18 +27,16 @@ Array.prototype.forEach.call(containers, container => {
     name: "af-connect-module",
     version: "1.2.0-beta",
     label: container.getAttribute("data-label") || "AF Connect",
-    purpose: container.getAttribute("data-purpose") || "QW5zw7ZrYW4gb20gam9iYiBzb20gRGlldGlzdCBww6UgS2Fyb2xpbnNrYSBJbnN0aXR1dGV0",
-    jobTitle: container.getAttribute("data-job_title") || "Dietist",
-    companyName: container.getAttribute("data-company_name") || "Karolinska",
+    purpose: container.getAttribute("data-purpose") || undefined,
+    jobTitle: container.getAttribute("data-job_title") || undefined,
+    companyName: container.getAttribute("data-company_name") || undefined,
     pollRate: container.getAttribute("data-poll_rate") || "1000", // 1 second
     pollRetry: container.getAttribute("data-poll_retry") || "10",
     timeout: container.getAttribute("data-poll_timeout") || "300000", // 5 minutes
     afConnectUrl:
-      container.getAttribute("data-af_connect_url") ||
-      "https://af-connect.local",
+      container.getAttribute("data-af_connect_url") || undefined,
     afPortabilityUrl:
-      container.getAttribute("data-af_portability_url") ||
-      "http://af-connect.local:8080",
+      container.getAttribute("data-af_portability_url") || undefined,
     afPortabilityApiKey:
       container.getAttribute("data-af_portability_api_key") || "dummykey",
     onResponse: container.getAttribute("data-on_response") || undefined,
