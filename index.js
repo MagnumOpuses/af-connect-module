@@ -24,7 +24,7 @@ Array.prototype.forEach.call(containers, container => {
 
   let config = {
     name: "af-connect-module",
-    version: "1.1.0-beta",
+    version: "1.2.0-beta",
     label: container.getAttribute("data-label") || "AF Connect",
     purpose: container.getAttribute("data-purpose") || undefined,
     jobTitle: container.getAttribute("data-job_title") || undefined,
@@ -33,11 +33,9 @@ Array.prototype.forEach.call(containers, container => {
     pollRetry: container.getAttribute("data-poll_retry") || "10",
     timeout: container.getAttribute("data-poll_timeout") || "300000", // 5 minutes
     afConnectUrl:
-      container.getAttribute("data-af_connect_url") ||
-      "https://af-connect.local",
+      container.getAttribute("data-af_connect_url") || undefined,
     afPortabilityUrl:
-      container.getAttribute("data-af_portability_url") ||
-      "http://af-connect.local:8080",
+      container.getAttribute("data-af_portability_url") || undefined,
     afPortabilityApiKey:
       container.getAttribute("data-af_portability_api_key") || "dummykey",
     onResponse: container.getAttribute("data-on_response") || undefined,
