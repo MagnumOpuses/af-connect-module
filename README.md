@@ -5,7 +5,7 @@
 # AF Connect Module
 
 - [Introduction](#introduction)
-  - [Live use-case demo](#live-use-case-demo)
+  - [Live u se-case demo](#live-use-case-demo)
   - [AF-Connect communication diagram](#af-connect-communication-diagram)
   - [AF-Connect Module sequence diagram](#af-connect-module-sequence-diagram)
 - [Getting started](#getting-started)
