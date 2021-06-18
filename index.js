@@ -19,11 +19,11 @@ const checkCompatability = (host, name, version, onIncompatible) => {
 const containers = document.getElementsByClassName("af-connect-module");
 Array.prototype.forEach.call(containers, container => {
   container.style["display"] = "inline";
-  let label = Buffer.from('Hämta CV från Arbetsförmedlingen', 'utf-8');
+
   let config = {
     name: "af-connect-module",
     version: "1.2.0-beta",
-    label: container.getAttribute("data-label") || label,
+    label: container.getAttribute("data-label") || 'Hämta CV från Arbetsförmedlingen',
     purpose: container.getAttribute("data-purpose") || undefined,
     jobTitle: container.getAttribute("data-job_title") || undefined,
     companyName: container.getAttribute("data-company_name") || undefined,
