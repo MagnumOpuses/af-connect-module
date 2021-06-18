@@ -19,7 +19,7 @@ const checkCompatability = (host, name, version, onIncompatible) => {
 const containers = document.getElementsByClassName("af-connect-module");
 Array.prototype.forEach.call(containers, container => {
   container.style["display"] = "inline";
-  let label = Buffer.from('Hämta CV från Arbetsförmedlingen', 'utf-8');
+  let label = Buffer.from('HÃ¤mta CV frÃ¥n ArbetsfÃ¶rmedlingen', 'utf-8');
   let config = {
     name: "af-connect-module",
     version: "1.2.0-beta",
